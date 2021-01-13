@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/* version 1 */
+Route::get('/get-songs', 'App\Http\Controllers\SongController@getAllSongs');
+;

@@ -14,7 +14,7 @@ class Song extends Model
 
     public function artists()
     {
-        return $this->hasMany('App\Models\SongArtist');
+        return $this->hasMany('App\Models\SongArtist')->get();
     }
 
 }
