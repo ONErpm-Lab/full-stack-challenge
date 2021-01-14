@@ -9,7 +9,7 @@ class Song extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'isrc', 'release_date', 'title', 'duration', 'preview_link', 'spotify_link','brasil_available'
+        'album_cover','isrc', 'release_date', 'title', 'duration', 'preview_link', 'spotify_link','brasil_available'
     ];
 
     public function artists()
