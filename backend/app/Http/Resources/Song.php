@@ -16,6 +16,7 @@ class Song extends JsonResource
     {
         return [
             'isrc' => $this->isrc,
+            'album_cover' => $this->album_cover,
             'release_date' => $this->release_date,
             'title' => $this->title,
             'duration' => $this->duration,
