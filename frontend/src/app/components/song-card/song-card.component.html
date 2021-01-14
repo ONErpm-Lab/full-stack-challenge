@@ -1,1 +1,16 @@
-<p>song-card works!</p>
+<div>
+    <img [src]="song.album_cover" alt="album cover">
+    <div>{{song.title}}</div>
+    <div>{{song.release_date}}</div>
+    <div>{{song.duration}}</div>
+    <video controls autoplay name="media">
+        <source [src]="song.preview_link">
+    </video>
+    <a [href]="song.spotify_link"></a>
+    <div>Brasil <span *ngIf="song.brasil_available === 1">not </span> available</div>
+    <div>
+        <span *ngFor="let artist of song.artists">
+            {{artist.artist_name}}
+        </span>
+    </div>
+</div>

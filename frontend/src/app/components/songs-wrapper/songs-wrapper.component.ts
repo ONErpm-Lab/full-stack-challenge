@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-songs-wrapper',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SongsWrapperComponent implements OnInit {
 
-  constructor() { }
+  private urlHost = 'http://localhost:8000/api/';
+
+  songs: any [];
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
+    this.getSongs();
+  }
+
+  getSongs() {
+    const url = this.urlHost + 'get-songs';
+    this.http.get(url)
+    .subscribe( (data: any[]) => {
+      this.songs = data;
+    })
   }
 
 }
