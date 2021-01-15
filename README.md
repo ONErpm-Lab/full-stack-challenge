@@ -23,7 +23,7 @@ php artisan migrate:fresh --seed
 #run local server
 php artisan serve
 ```
-###Frontend
+### Frontend
 
 Run the following commands:
 ```bash
