@@ -10,6 +10,7 @@ class SongSeeder extends Seeder
 {
     var $client_id;
     var $client_secret;
+    var $acces_token;
 
     function __construct() {
        $this->client_id = "21f57101fa934d13b2b533c43d48d649";
@@ -36,7 +37,7 @@ class SongSeeder extends Seeder
             'verify'  => false,
         ]);
         $response = json_decode($response->getBody(), true);
-        return $response["access_token"];
+        $this->acces_token = $response["access_token"];
     }
 
     private function addSongArtist($song, $artists) {
@@ -48,11 +49,14 @@ class SongSeeder extends Seeder
         }
     }
 
+    /**
+     * Retrieves song from spotify api with specified isrc and 
+     */
     private function addSong($isrc) {
         $client = new Client(); //GuzzleHttp\Client
         $url = 'https://api.spotify.com/v1/search?type=track&q=isrc:'. $isrc;
         $headers = [
-            'Authorization' => 'Bearer '.$this->getAccesToken(),
+            'Authorization' => 'Bearer '. $this->acces_token,
         ];
 
         $response = $client->request('GET', $url, [
@@ -101,6 +105,7 @@ class SongSeeder extends Seeder
             'QZNJX2081700',
             'QZNJX2078148'
         ];
+        getAccesToken();
         foreach ($nonIncludedSongs as $isrc) {
             $this->addSong($isrc);
         }
