@@ -17,6 +17,9 @@ class SongSeeder extends Seeder
        $this->client_secret = "c879ef8b5a784bd5824f51aa85391b99";
     }
 
+    /**
+     * Obtains authorization token to comunicate with spotify api
+     */
     private function getAccesToken() {
         $client = new Client(); //GuzzleHttp\Client
         $url = "https://accounts.spotify.com/api/token";
@@ -40,6 +43,9 @@ class SongSeeder extends Seeder
         $this->acces_token = $response["access_token"];
     }
 
+    /**
+     * Seeds song_artists table
+     */
     private function addSongArtist($song, $artists) {
         foreach ($artists as $artist) {
             DB::table('song_artists')->insert([
@@ -50,7 +56,7 @@ class SongSeeder extends Seeder
     }
 
     /**
-     * Retrieves song from spotify api with specified isrc and 
+     * Retrieves song from spotify api with specified isrc and seed songs table
      */
     private function addSong($isrc) {
         $client = new Client(); //GuzzleHttp\Client

@@ -8,13 +8,12 @@ use Illuminate\Http\JsonResponse;
 
 class SongController extends Controller
 {
-    //
+    /**
+    * Gets all song fron song database
+    */
     public function getAllSongs(): JsonResponse
-    {
-        /* get all posts ordered by published date */
+    {        
         $songs = Song::get();
-
-        /* wrap posts in a resource */
         return SongResource::collection($songs)->response();
     }
 }

@@ -14,13 +14,8 @@ class CreateSongArtistsTable extends Migration
     public function up()
     {
         Schema::create('song_artists', function (Blueprint $table) {
-            /* references user */
             $table->integer('song_id')->unsigned();
-
-            /* references post */
             $table->string('artist_name');
-
-            /* user id foreign key constraint declaration */
             $table->foreign('song_id')->references('id')->on('songs')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
