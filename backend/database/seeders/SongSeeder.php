@@ -72,6 +72,8 @@ class SongSeeder extends Seeder
                 'spotify_link' => $response['external_urls']['spotify'],
                 'brasil_available' => in_array('BR',$response['available_markets'])
             ]);
+            var_dump($response['available_markets']);
+            var_dump(in_array('BR',$response['available_markets']));
 
             $song = DB::table('songs')->where('isrc', '=', $isrc)->get()->toArray();
             $idSong = $song[0] ->id;
