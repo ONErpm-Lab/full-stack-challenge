@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SongsWrapperComponent } from './components/songs-wrapper/songs-wrapper.component';
 import { SongCardComponent } from './components/song-card/song-card.component';
+import { Ms2minutesPipe } from './pipes/ms2minutes.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     SongsWrapperComponent,
-    SongCardComponent
+    SongCardComponent,
+    Ms2minutesPipe
   ],
   imports: [
     BrowserModule,

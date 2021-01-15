@@ -1,3 +1,8 @@
-<app-song-card *ngFor="let song of songs" [song]="song">
-
-</app-song-card>
+<div class="center" [ngStyle]="{'width': wrapperWidth}">
+    <h1 class="title">Song list</h1>
+    <div class="d-flex" >
+        <app-song-card *ngFor="let song of songs" [song]="song">
+        
+        </app-song-card>
+    </div>
+</div>

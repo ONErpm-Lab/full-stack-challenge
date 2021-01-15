@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+$body-font-family:  'Montserrat', sans-serif;
+$grey: #212426;
+$blue: #20788C;
+$yellow: #D2AA08;
+$green: #BF9411;
+$orange: #F25D07;
+
+.d-flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+body {
+    background-color: $grey;
+    color: whitesmoke;
+    font-family: $body-font-family;
+}
+

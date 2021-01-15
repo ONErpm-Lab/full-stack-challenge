@@ -9,9 +9,12 @@ export class SongCardComponent implements OnInit {
 
   @Input() song;
 
-  constructor() { }
+  brasilAvailable;
+  constructor() {     
+  }
 
   ngOnInit(): void {
+    this.brasilAvailable = this.song.brasil_available === 1;
   }
 
 }

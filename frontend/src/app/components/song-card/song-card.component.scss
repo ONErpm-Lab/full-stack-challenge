@@ -1,0 +1,51 @@
+$inner-card-width: 345px;
+.iconify {
+    $side: 45px; 
+    color: #1db954;
+    width: $side;
+    height: $side;
+    margin-left: 5px;
+}
+
+.card{ 
+    margin: 20px;
+    border: #F25D07 solid 3px;
+    padding: 15px;
+    border-radius: 5px;
+    max-width: 380;
+}
+
+.title-container {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.song-name {
+    font-size: x-large;
+    font-weight: 900;
+    display: inline;
+    width: 280px;
+}
+
+.artist-container {
+    width: 345px; 
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.data-element {
+    margin: 10px 0;
+}
+
+.bold-yellow {
+    color:  #D2AA08;
+    font-weight: 600;
+}
+
+.green {
+    color: #1db954;
+}
+
+.red {
+    color: red;
+}
