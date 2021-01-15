@@ -5,6 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class Ms2minutesPipe implements PipeTransform {
 
+  /**
+   * Tarnsforms miliseconds into mm:ss format
+   * @param value number of miliseconds
+   */
   transform(value: number): string {
     const totalSeconds = value/1000;
     const minutes = Math.floor(totalSeconds/60);

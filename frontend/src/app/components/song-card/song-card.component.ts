@@ -9,6 +9,8 @@ export class SongCardComponent implements OnInit {
 
   @Input() song;
 
+
+  //represetns wether the current song is available in brazil or not
   brasilAvailable;
   constructor() {     
   }

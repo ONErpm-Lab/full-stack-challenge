@@ -11,7 +11,10 @@ export class SongsWrapperComponent implements OnInit {
 
   private urlHost = 'http://localhost:8000/api/';
 
+  //Aray of songs
   songs: any [];
+
+  //width of the sogns wrapper
   wrapperWidth;
   constructor(
     private http: HttpClient
@@ -22,6 +25,9 @@ export class SongsWrapperComponent implements OnInit {
     this.setWrapperWidth(window.innerWidth);
   }
 
+  /**
+   * Retrieves sogn list from backend
+   */
   getSongs() {
     const url = this.urlHost + 'get-songs';
     this.http.get(url)
@@ -30,11 +36,20 @@ export class SongsWrapperComponent implements OnInit {
     })
   }
 
+
+  /**
+   * Sets the width of the wrapper of the cards
+   * @param width current width of the screen
+   */
   setWrapperWidth(width) {
     const w = Math.floor(width/436)*436;
     this.wrapperWidth = w == 0 ? width : w.toString() + 'px';
   }
 
+  /**
+   * Listens to resizing event
+   * @param event Resize event
+   */
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.setWrapperWidth(window.innerWidth);
