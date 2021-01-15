@@ -1,5 +1,5 @@
 This app is a solution to the ONErpm full-stack-challenge. 
-##Run locally
+## Run locally
 ### Backend
 Set the follosing variables in a .env file stored in the root of backend folder:
 ```bash
