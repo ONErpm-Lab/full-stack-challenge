@@ -1,25 +1,31 @@
-<div class="card">
-    <div class="d-flex title-container" >
-        <div class="song-name bold-yellow">{{song.title}}</div>
-        <img [src]="song.album_cover" alt="album cover">
-    </div>
-    <div class="data-element"><span class="bold-yellow">Release date: </span>{{song.release_date  | date:'longDate'}}</div>
-    <div class="data-element"><span class="bold-yellow">Duration: </span>{{song.duration | ms2minutes}}</div>
-    <div class="data-element">
-        <div class="bold-yellow">Artists:</div>
-        <div class="artist-container">
-            <span *ngFor="let artist of song.artists; let i = index">
-                <span *ngIf="i>0">, </span>{{artist.artist_name}}
-            </span>
+<div class="song-card-container">
+    <div class="song-card d-flex flex-column justify-content-between">
+        <div class="d-flex title-container justify-content-between" >
+            <div class="song-name bold-yellow">{{song.title}}</div>
+            <img [src]="song.album_cover" alt="album cover">
         </div>
+        <div>
+            <div class="data-element"><span class="bold-yellow">Release date: </span>{{song.release_date  | date:'longDate'}}</div>
+            <div class="data-element"><span class="bold-yellow">Duration: </span>{{song.duration | ms2minutes}}</div>
+            <div class="data-element">
+                <div class="bold-yellow">Artists:</div>
+                <div class="d-flex">
+                    <span *ngFor="let artist of song.artists; let i = index">
+                        {{artist.artist_name}}<span *ngIf="i<song.artists.length - 1">,&nbsp;</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="data-element" [ngClass]="brasilAvailable ? 'green' : 'red' ">Brasil <span *ngIf="!brasilAvailable">not </span> available</div>
+            <div class="d-flex" style="align-items: center;">
+                <audio class="m-player" controls name="media">
+                    <source [src]="song.preview_link">
+                </audio>
+                <a [href]="song.spotify_link"><span class="iconify" data-icon="entypo-social:spotify" data-inline="false"></span></a>
+            </div>            
+        </div>
+        
     </div>
-    <div class="data-element" [ngClass]="brasilAvailable ? 'green' : 'red' ">Brasil <span *ngIf="!brasilAvailable">not </span> available</div>
-    <div class="d-flex" style="align-items: center;">
-        <audio controls name="media">
-            <source [src]="song.preview_link">
-        </audio>
-        <a [href]="song.spotify_link"><span class="iconify" data-icon="entypo-social:spotify" data-inline="false"></span></a>
-    </div>
-    
-    
 </div>

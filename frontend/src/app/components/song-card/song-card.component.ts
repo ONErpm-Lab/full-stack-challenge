@@ -16,7 +16,7 @@ export class SongCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.brasilAvailable = this.song.brasil_available === 1;
+    this.brasilAvailable = this.song.brasil_available;
   }
 
 }
