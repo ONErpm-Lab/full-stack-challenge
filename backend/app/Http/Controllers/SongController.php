@@ -13,7 +13,7 @@ class SongController extends Controller
     */
     public function getAllSongs(): JsonResponse
     {        
-        $songs = Song::get();
+        $songs = Song::get()->sortBy('title');
         return SongResource::collection($songs)->response();
     }
 }
