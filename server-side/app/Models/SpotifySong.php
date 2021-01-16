@@ -22,7 +22,7 @@ class SpotifySong
   /** 
    * @brief The date in which the album was released formated as YYYY-MM-DD
    */
-  public $releaseDate = "";
+  public $release_date = "";
 
   /** 
    * @brief The name of the track
@@ -42,22 +42,27 @@ class SpotifySong
   /** 
    * @brief The URL of the 30 sec audio preview for the song.
    */
-  public $audioPreview = "";
+  public $audio_preview = "";
 
   /** 
    * @brief The URL of the song in spotify.
    */
-  public $spotifyLink = "";
+  public $spotify_link = "";
 
   /**
    * @brief True if this track is available in the Spotify Brazilian market.
    */
-  public $availableInBR = false;
+  public $available_in_br = false;
+
 
   /**
    * @brief This method will fetch a track's information from the spotify
    * catalog based on it's ISRC number. If the ISRC was not found, the title of
    * the returned SpotifySong will be "Track Not Found".
+   *
+   * @param isrc string isrc identifier.
+   * @return A SpotifySong object populated with the details for the requested
+   * song
    */
   public static function getSongDetails($isrc) : SpotifySong {
     $token = SpotifySong::getAccessToken();
@@ -78,16 +83,16 @@ class SpotifySong
     // Song was found, get the relevant fields and return them as a SpotifySong object.
     $item = $searchResult->tracks->items[0];
     $song->thumb = $item->album->images[0]->url;
-    $song->releaseDate = $item->album->release_date;
+    $song->release_date = $item->album->release_date;
     $song->title = $item->name;
     foreach ($item->artists as $artist) {
       $song->artists[] = $artist->name;
     }
     $song->duration = $item->duration_ms;
-    $song->audioPreview = $item->preview_url;
-    $song->spotifyLink = $item->href;
+    $song->audio_preview = $item->preview_url;
+    $song->spotify_link = $item->href;
     if(in_array('BR', $item->available_markets)) {
-      $song->availableInBR = true;
+      $song->available_in_br = true;
     }
 
     return $song;
