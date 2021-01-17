@@ -1,3 +1,11 @@
+## Rafael Vega's Solution 
+
+* Server side. Create database for devel and for test, create .env and .env.testing from .env.example    php artisan serve and php artisan test
+
+
+
+
+
 ## Início
 
 Bem vindo ao mundo da música!
