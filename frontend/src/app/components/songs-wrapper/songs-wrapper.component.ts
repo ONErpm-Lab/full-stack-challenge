@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HostListener } from '@angular/core';
 import { SongsService } from 'src/app/services/songs.service';
 
 @Component({
@@ -16,7 +15,9 @@ export class SongsWrapperComponent implements OnInit {
 
   constructor(
     private songsService: SongsService
-  ) { }
+    ) { 
+     
+    }
 
   ngOnInit(): void {
     this.getSongs();
