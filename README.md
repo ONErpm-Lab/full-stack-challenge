@@ -1,4 +1,4 @@
-This app is a solution to the ONErpm full-stack-challenge. 
+This app is a solution to the ONErpm full-stack-challenge. Check demo in: https://onerpm-challenge.web.app/.
 ## Run locally
 ### Backend
 Set the follosing variables in a .env file stored in the root of backend folder:
