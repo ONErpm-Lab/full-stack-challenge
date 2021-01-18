@@ -1,0 +1,27 @@
+#loading {
+  text-align: center;
+  margin: 25% auto;
+}
+
+.song img {
+  width: 100%;
+}
+
+.player-container {
+  position: relative;
+}
+
+.brazil {
+  width: '40px';
+  margin-top: 5px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards .song .w3-card {
+  min-height: 400px;
+  height: calc(100% - 10px);
+}

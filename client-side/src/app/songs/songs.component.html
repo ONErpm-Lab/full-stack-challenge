@@ -1,0 +1,33 @@
+<div id="loading" *ngIf="loading"><img src="/assets/loading.gif" /></div>
+
+<div class="cards w3-row">
+  <div *ngFor="let song of songs" class="song w3-col m4 l3 w3-container">
+
+    <div *ngIf="song.title == 'Track Not Found'; else elseFound" class="w3-card">
+      <h3 class="w3-red w3-container">{{song.isrc}}</h3>
+      <div class="w3-container">
+        <h4>Track information not available.</h4>
+      </div>
+    </div>
+
+    <ng-template #elseFound>
+      <div class="w3-card">
+        <h3 class="w3-red w3-container">{{song.isrc}}</h3>
+        <div class="w3-container">
+          <div class="player-container">
+            <img src="{{song.thumb}}" />
+            <ngx-circular-player source="{{song.audio_preview}}" radius="100"></ngx-circular-player>
+          </div>
+          <h4>{{song.title}}</h4>
+          <p>
+            <strong>Release Date:</strong> {{song.release_date}}<br/>
+            <strong>Artists:</strong> {{song.artists}}<br/>
+            <strong>Duration:</strong> {{song.duration}}<br/>
+            <strong><a href="{{song.spotify_link}}" target="_blank">Open in Spotify</a></strong><br/>
+            <img class="brazil" src="/assets/brasil.png" *ngIf="song.available_in_br" title="This track is available in BR" style="width:40px;" />
+          </p>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
