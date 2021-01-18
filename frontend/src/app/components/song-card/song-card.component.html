@@ -5,11 +5,11 @@
             <img [src]="song.album_cover" alt="album cover">
         </div>
         <div>
-            <div class="data-element"><span class="bold-yellow">Release date: </span>{{song.release_date  | date:'longDate'}}</div>
-            <div class="data-element"><span class="bold-yellow">Duration: </span>{{song.duration | ms2minutes}}</div>
+            <div class="data-element release-date"><span class="bold-yellow">Release date: </span>{{song.release_date  | date:'longDate'}}</div>
+            <div class="data-element duration"><span class="bold-yellow">Duration: </span>{{song.duration | ms2minutes}}</div>
             <div class="data-element">
                 <div class="bold-yellow">Artists:</div>
-                <div class="d-flex">
+                <div class="d-flex artists">
                     <span *ngFor="let artist of song.artists; let i = index">
                         {{artist.artist_name}}<span *ngIf="i<song.artists.length - 1">,&nbsp;</span>
                     </span>
