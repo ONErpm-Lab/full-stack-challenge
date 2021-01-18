@@ -18,6 +18,6 @@ describe('Ms2minutesPipe', () => {
   });
 
   it('create an instance', () => {
-    expect(pipe.transform(285965)).toBe('4:46');
+    expect(pipe.transform(285965)).toBe('4:46 ');
   });
 });
