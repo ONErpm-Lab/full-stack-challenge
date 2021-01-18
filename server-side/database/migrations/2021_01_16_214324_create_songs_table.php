@@ -18,8 +18,8 @@ class CreateSongsTable extends Migration
         $table->timestamps();
 
         $table->string('isrc');
-        //$table->unique('isrc');
-        //$table->index('isrc');
+        $table->unique('isrc');
+        $table->index('isrc');
 
         // For the artists field, we'd probably use a separate "Artists" table
         // with a one to many relationship with the "Songs" table but I'm keeping

@@ -77,6 +77,7 @@ class SpotifySong
     // If there are no search results.
     if(count($searchResult->tracks->items) == 0){
       $song->title = "Track Not Found";
+      $song->release_date = "1970-01-01";
       return $song;
     }
 
@@ -90,7 +91,7 @@ class SpotifySong
     }
     $song->duration = $item->duration_ms;
     $song->audio_preview = $item->preview_url;
-    $song->spotify_link = $item->href;
+    $song->spotify_link = $item->external_urls->spotify;
     if(in_array('BR', $item->available_markets)) {
       $song->available_in_br = true;
     }
