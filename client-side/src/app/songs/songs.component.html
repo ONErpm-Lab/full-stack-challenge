@@ -1,7 +1,7 @@
 <div id="loading" *ngIf="loading"><img src="/assets/loading.gif" /></div>
 
 <div class="cards w3-row">
-  <div *ngFor="let song of songs" class="song w3-col m4 l3 w3-container">
+  <div *ngFor="let song of songs" class="song w3-col m6 l3 w3-container">
 
     <div *ngIf="song.title == 'Track Not Found'; else elseFound" class="w3-card">
       <h3 class="w3-red w3-container">{{song.isrc}}</h3>
