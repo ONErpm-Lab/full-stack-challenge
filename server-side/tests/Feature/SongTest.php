@@ -24,24 +24,22 @@ class SongTest extends TestCase
 
     // Get the list of songs and make sure they are correct
     $response = $this->get('/');
-    //$response->dump();
+    //$response->dump();  // useful when debugging this test.
     $response->assertStatus(200);
-
     $data = $response->original;
-    $this->assertEquals(9, count($data));
+    $this->assertEquals(10, count($data));
     $this->assertEquals("Facada", $data[0]->title);
-    $this->assertEquals("DJ Malibu, MC Pack, MC Gui Andrade", $data[6]->artists);
+    $this->assertEquals("DJ Malibu, MC Pack, MC Gui Andrade", $data[7]->artists);
 
     // Make sure the song details were inserted in the database. Fetch the
     // songs again and assert correct fields.
-    $this->assertDatabaseCount('songs', 9);
+    $this->assertDatabaseCount('songs', 10);
 
     $response = $this->get('/');
     $response->assertStatus(200);
-    
     $data = $response->original;
-    $this->assertEquals(9, count($data));
+    $this->assertEquals(10, count($data));
     $this->assertEquals("Facada", $data[0]->title);
-    $this->assertEquals("DJ Malibu, MC Pack, MC Gui Andrade", $data[6]->artists);
+    $this->assertEquals("DJ Malibu, MC Pack, MC Gui Andrade", $data[7]->artists);
   }
 }
