@@ -47,7 +47,7 @@ Request:
 
 Response:
 
-`
+```json
 [
   {
     "isrc": "US7VG1846811",
@@ -160,8 +160,7 @@ Response:
     "available_in_br": 1
   }
 ]
-
-` 
+```
 
 In the back-end, there is a  ` j
 
