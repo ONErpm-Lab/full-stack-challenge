@@ -1,17 +1,14 @@
-import Spotify from '../../../adapters'
-import { Song } from './../../../domain/models/Song'
+import spotify from '../../../adapters'
 import { UseCase } from './../../../shared/core/UseCase'
-import SongRepo from './../../../domain/repos'
+import songRepo from './../../../domain/repos'
 
-export default class postSongsUseCase implements UseCase {
+export default class PostSongsUseCase implements UseCase {
 
     public async execute(ISRC: string) : Promise<any> {
 
-        const Song = await Spotify.getSongByISRC(ISRC)
+        const song = await spotify.getSongByISRC(ISRC)
 
-        const result = SongRepo.insertSong(Song)
-
-        console.log(result)
+        const result = await songRepo.insertSong(song)
 
         return result
     }

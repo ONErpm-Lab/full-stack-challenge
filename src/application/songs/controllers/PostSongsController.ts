@@ -1,6 +1,6 @@
 import { UseCase } from "../../../shared/core/UseCase"
 
-export default class postSongsController implements UseCase {
+export default class PostSongsController implements UseCase {
 
     private useCase: UseCase
 

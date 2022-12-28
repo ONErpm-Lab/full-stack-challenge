@@ -1,4 +1,4 @@
-import { PostSongsController } from '../../controllers'
+import { postSongsController } from '../../controllers'
 import { Router } from 'express'
 
 const router = Router({ mergeParams: true })
@@ -15,7 +15,7 @@ router.post('', async (req, res) => {
         baseUrl: req.baseUrl
     }
 
-    const {code, message} = await PostSongsController.execute(httpRequest)
+    const {code, message} = await postSongsController.execute(httpRequest)
 
     res.status(code).send([message])
 
