@@ -2,7 +2,7 @@ import { Song } from './../../../domain/models/Song';
 import Controller from "../../../shared/core/Controller"
 import { UseCase } from "../../../shared/core/UseCase"
 
-export default class getSongsController extends Controller {
+export default class GetSongsController extends Controller {
 
     private useCase: UseCase
 

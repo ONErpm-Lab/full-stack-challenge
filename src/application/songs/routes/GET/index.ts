@@ -1,12 +1,11 @@
-import { GetSongsController } from '../../controllers'
+import { getSongsController } from '../../controllers'
 import { Router } from 'express'
-import Spotify from '../../../../adapters'
 
 const router = Router({ mergeParams: true })
 
 router.get('', async (req, res) => {
 
-    const {code, message, songsList} = await GetSongsController.execute()
+    const {code, message, songsList} = await getSongsController.execute()
 
     res.status(code).send([message, songsList])
 
