@@ -1,13 +1,13 @@
-import getSongsUseCase from "./GetSongsUseCase"
-import getSongUseCase from "./song/GetSongUseCase"
-import postSongsUseCase from "./PostSongsUseCase"
+import GetSongsUseCase from "./GetSongsUseCase"
+import GetSongUseCase from "./song/GetSongUseCase"
+import PostSongsUseCase from "./PostSongsUseCase"
 
-const GetSongsUseCase = new getSongsUseCase()
-const GetSongUseCase = new getSongUseCase()
-const PostSongsUseCase = new postSongsUseCase()
+const getSongsUseCase = new GetSongsUseCase()
+const getSongUseCase = new GetSongUseCase()
+const postSongsUseCase = new PostSongsUseCase()
 
 export {
-    GetSongsUseCase,
-    GetSongUseCase,
-    PostSongsUseCase
+    getSongsUseCase,
+    getSongUseCase,
+    postSongsUseCase
 }
