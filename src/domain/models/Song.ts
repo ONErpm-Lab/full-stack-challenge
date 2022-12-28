@@ -6,7 +6,7 @@ interface SongProps {
     thumbFile: string
     debutDate: string
     artists: Array<String>
-    seconds: string
+    miliseconds: string
     previewFile: string
     spotifyUrl: string
     isAvaibleAtCountry: boolean
