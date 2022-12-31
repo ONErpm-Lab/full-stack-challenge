@@ -1,19 +1,23 @@
 import { Song } from "../models/Song";
 
 export class SongMapper {
-    static toInsert(song: Song){}
 
     static toResponse(song: any): Song {
-        return Song.create({
-            "ISRC": "string",
-            "name": "string",
-            "thumbFile": "string",
-            "debutDate": "string",
-            "artists": ["Array<String>"],
-            "miliseconds": "string",
-            "previewFile": "string",
-            "spotifyUrl": "string",
-            "isAvaibleAtCountry": true
+        const songCreated = Song.create({
+            "ISRC": song.ISRC,
+            "name": song.name,
+            "thumbFile": song.thumbFile,
+            "thumbFileIcon": song.thumbFileIcon,
+            "debutDate": song.debutDate,
+            "artists": song.artists,
+            "miliseconds": song.miliseconds,
+            "previewFile": song.previewFile,
+            "spotifyUrl": song.spotifyUrl,
+            "isAvaibleAtCountry": song.isAvaibleAtCountry
         })
+
+        songCreated.id = song.id
+
+        return songCreated
     }
 }
