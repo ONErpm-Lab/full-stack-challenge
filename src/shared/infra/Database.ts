@@ -10,11 +10,11 @@ export class Database implements IDatabase {
     async Connect () {
         try {
             return createPool({
-                host: 'containers-us-west-47.railway.app',
-                user: 'root',
-                password: '3FbATq8NwYzUedj6FOyw',
-                database: 'spotify',
-                port: 7144
+                host: process.env['DB_HOST'],
+                user: process.env['DB_USER'],
+                password: process.env['DB_PASS'],
+                database: process.env['DB_SCHEMA'],
+                port: Number(process.env['DB_PORT'])
             })
         } catch (err) {
             console.log('ERRO CONEXÃO DB => ', err)
