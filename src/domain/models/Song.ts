@@ -1,15 +1,16 @@
 import { Entity } from '../../shared/domain/Entity'
 
 interface SongProps {
-    ISRC: string
     name: string
+    ISRC: string
     thumbFile: string
-    debutDate: string
-    artists: Array<String>
-    miliseconds: string
+    thumbFileIcon: string
     previewFile: string
     spotifyUrl: string
     isAvaibleAtCountry: boolean
+    debutDate: string
+    artists: string
+    miliseconds: string
 }
 
 export class Song extends Entity<SongProps> {
@@ -22,5 +23,9 @@ export class Song extends Entity<SongProps> {
         const song = new Song(props)
 
         return song
+    }
+
+    static getValue(song: Song): SongProps {
+        return song.props
     }
 }
