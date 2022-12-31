@@ -23,6 +23,23 @@ Recebe código ISRC, busca dados da música na API do Spotify e as salva no banc
 
 ## Rodar o projeto
 
+### Banco dependente
+O projeto faz uso de uma tabela, este script pode ser usado para cria-la:
+
+    CREATE TABLE songs (
+    id int primary key auto_increment,
+    name varchar(256),
+    ISRC varchar(256) unique,
+    thumbFile varchar(256),
+    thumbFileIcon varchar(256),
+    previewFile varchar(256),
+    spotifyUrl varchar(256),
+    isAvaibleAtCountry boolean,
+    debutDate DATE,
+    miliseconds varchar(122),
+    artists varchar(256)
+    );
+
 ### Configurar .env
 Na raíz do projeto, configure um .env com os parâmetros de conexões externas da aplicação
 
