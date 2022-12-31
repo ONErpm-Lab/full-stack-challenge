@@ -54,7 +54,7 @@ export class Spotify {
             "thumbFileIcon": data.album.images[2].url,
             "debutDate": data.album.release_date,
             "artists": await this.getArtists(data.artists),
-            "miliseconds": data.duration_ms,
+            "milliseconds": data.duration_ms,
             "previewFile": data.preview_url,
             "spotifyUrl": data.external_urls.spotify,
             "isAvaibleAtCountry": await this.isAvaibleAtCountry(data.available_markets),

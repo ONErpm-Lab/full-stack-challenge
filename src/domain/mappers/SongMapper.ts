@@ -9,7 +9,7 @@ export class SongMapper {
             "thumbFileIcon": song.thumbFileIcon,
             "debutDate": DateTime.dateTimeToDate(song.debutDate),
             "artists": song.artists,
-            "miliseconds": DateTime.millisToMinutesAndSeconds(song.miliseconds),
+            "milliseconds": DateTime.millisToMinutesAndSeconds(song.milliseconds),
             "previewFile": song.previewFile,
             "spotifyUrl": song.spotifyUrl,
             "isAvaibleAtCountry": song.isAvaibleAtCountry

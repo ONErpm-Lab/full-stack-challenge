@@ -11,7 +11,7 @@ describe('Tests if entity Song works - Right Scenario', () => {
         "isAvaibleAtCountry": true,
         "debutDate": "2021-08-31",
         "artists": "Daisy the Great,AJR",
-        "miliseconds": "149538"
+        "milliseconds": "149538"
     }
 
     const createdSong = Song.create(song)
@@ -26,7 +26,7 @@ describe('Tests if entity Song works - Right Scenario', () => {
         expect((Song.getValue(createdSong)).isAvaibleAtCountry).toBe(true)
         expect((Song.getValue(createdSong)).debutDate).toBe("2021-08-31")
         expect((Song.getValue(createdSong)).artists).toEqual("Daisy the Great,AJR")
-        expect((Song.getValue(createdSong)).miliseconds).toBe("149538")
+        expect((Song.getValue(createdSong)).milliseconds).toBe("149538")
     })
 })
 

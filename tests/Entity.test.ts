@@ -11,7 +11,7 @@ describe('Tests if Entity set id works - Right Scenario', () => {
         "isAvaibleAtCountry": true,
         "debutDate": "2021-08-31",
         "artists": "Daisy the Great,AJR",
-        "miliseconds": "149538"
+        "milliseconds": "149538"
     }
 
     const createdSong = Song.create(song)

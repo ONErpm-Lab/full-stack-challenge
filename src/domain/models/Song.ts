@@ -10,7 +10,7 @@ interface SongProps {
     isAvaibleAtCountry: boolean
     debutDate: string
     artists: string
-    miliseconds: string
+    milliseconds: string
 }
 
 export class Song extends Entity<SongProps> {

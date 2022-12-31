@@ -36,7 +36,7 @@ O projeto faz uso de uma tabela, este script pode ser usado para cria-la:
     spotifyUrl varchar(256),
     isAvaibleAtCountry boolean,
     debutDate DATE,
-    miliseconds varchar(122),
+    milliseconds varchar(122),
     artists varchar(256)
     );
 
