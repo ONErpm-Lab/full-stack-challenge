@@ -17,9 +17,9 @@ export default class PostSongsController implements UseCase {
 
             return {code: 200, message: 'Sucesso'}
 
-        } catch{
+        } catch (err) {
 
-            return {code: 500, message: ''}
+            return {code: 500, message: `${err}`}
 
         }
     }
