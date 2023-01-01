@@ -12,6 +12,9 @@ Recebe código ISRC, busca dados da música na API do Spotify e as salva no banc
 ### Express
     npm install express
 
+### Nodemon
+    npm install nodemon
+
 ### Jest
     npm install ts-jest -D
 
