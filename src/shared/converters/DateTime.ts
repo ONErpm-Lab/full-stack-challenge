@@ -7,8 +7,11 @@ export default {
 
     dateTimeToDate: (dateTime: Date) => {
         const year = dateTime.getFullYear()
-        const month = dateTime.getMonth() + 1
-        const day = dateTime.getDate()
+        let month = String(dateTime.getMonth() + 1)
+        let day = String(dateTime.getDate())
+
+        month = month.length > 1 ? month : `0${month}`
+        day = day.length > 1 ? day : `0${day}`
 
         const date = `${year}-${month}-${day}`
 
