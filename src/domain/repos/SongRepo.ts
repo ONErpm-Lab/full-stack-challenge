@@ -10,6 +10,21 @@ export interface ISongRepo {
 
 export class SongRepo implements ISongRepo {
 
+    async exists(ISRC: string): Promise<boolean> {
+
+        const stmt = `
+            SELECT DISTINCT *
+            FROM
+                spotify.songs
+            WHERE
+                ISRC = ?`
+
+        const result: Array<any> = await database.read(stmt, [ISRC])
+
+        return result.length > 0
+
+    }
+
     async getAllSongs(): Promise<Array<Song>> {
 
         const stmt = `
@@ -55,6 +70,12 @@ export class SongRepo implements ISongRepo {
         `
 
         const songToInsert = Song.getValue(song)
+
+        const exists = await this.exists(songToInsert.ISRC)
+
+        if (exists) {
+            throw new Error(`Essa música já foi cadastrada`)
+        }
 
         try {
 
