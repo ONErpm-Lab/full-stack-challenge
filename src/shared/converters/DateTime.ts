@@ -13,7 +13,7 @@ export default {
         month = month.length > 1 ? month : `0${month}`
         day = day.length > 1 ? day : `0${day}`
 
-        const date = `${year}-${month}-${day}`
+        const date = `${day}/${month}/${year}`
 
         return date
     }
