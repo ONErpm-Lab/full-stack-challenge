@@ -30,7 +30,7 @@ export class SongRepo implements ISongRepo {
     async getAllSongs(): Promise<any> {
 
         const stmt = `
-            SELECT * FROM spotify.songs
+            SELECT * FROM spotify.songs ORDER BY name
         `
         try {
 
