@@ -36,7 +36,7 @@ export class Spotify {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
-                body: Variables.SPOTIFY_CREDENTIALS
+                body: process.env['SPOTIFY_CREDENTIALS']
             })
 
             const data = await response.json()
