@@ -1,0 +1,40 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "full-stack-challenge",
+        "description": "DOC to a songs API",
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/songs": {
+            "get": {
+                "responses": {}
+            },
+            "post": {
+                "parameters": [{
+                    "in": "query",
+                    "name": "isrc",
+                    "type": "string",
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    }
+                }
+            }
+        },
+        "/songs/{id}": {
+            "get": {
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "type": "string",
+                    "required": true
+                }],
+                "responses": {}
+            }
+        }
+    }
+}
