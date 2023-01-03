@@ -15,9 +15,9 @@ router.post('', async (req, res) => {
         baseUrl: req.baseUrl
     }
 
-    const {code, message} = await postSongsController.execute(httpRequest)
+    const result = await postSongsController.execute(httpRequest)
 
-    res.status(code).send([message])
+    res.status(result.code).send({ "Message": result.message })
 
 })
 

@@ -1,3 +1,5 @@
+import Responses from "../../../shared/core/Responses"
+import Errors from "../../../shared/core/ErrorHandler"
 import { UseCase } from "../../../shared/core/UseCase"
 
 export default class PostSongsController implements UseCase {
@@ -8,19 +10,23 @@ export default class PostSongsController implements UseCase {
         this.useCase = useCase
     }
 
-    public async execute(req: any) : Promise<{code: number, message: String}> {
+    public async execute(req: any) : Promise<{code: number, message: String | Error}> {
 
         try {
             const ISRC = req.query.isrc
 
-            await this.useCase.execute(ISRC)
+            if (ISRC.length === 12) {
 
-            return {code: 200, message: 'Sucesso'}
+                const result = await this.useCase.execute(ISRC)
+
+                return result
+
+            } else {
+                return Errors.badRequest('This ISRC is invalid')
+            }
 
         } catch (err) {
-
-            return {code: 500, message: `${err}`}
-
+            return Errors.unexpected()
         }
     }
 

@@ -1,3 +1,4 @@
+import Responses from './../../../shared/core/Responses';
 import { Song } from './../../../domain/models/Song';
 import spotify from '../../../adapters'
 import { UseCase } from './../../../shared/core/UseCase'
@@ -15,7 +16,7 @@ export default class PostSongsUseCase implements UseCase {
             return result
 
         } catch (err) {
-            throw new Error(`${err}`)
+            return err
         }
     }
 }

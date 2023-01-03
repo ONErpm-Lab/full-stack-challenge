@@ -1,3 +1,5 @@
+import Responses from '../../shared/core/Responses';
+import Errors from "../../shared/core/ErrorHandler"
 import database from "../../shared/infra/Database"
 import { SongMapper } from "../mappers/SongMapper"
 import { Song } from "../models/Song"
@@ -74,15 +76,14 @@ export class SongRepo implements ISongRepo {
         const exists = await this.exists(songToInsert.ISRC)
 
         if (exists) {
-            throw new Error(`Essa música já foi cadastrada`)
+            return Errors.badRequest('This song is already on the list.')
         }
 
         try {
-
             await database.write(stmt, [ songToInsert ])
-
+            return Responses.success('Song saved!')
         } catch (err) {
-            throw new Error(`Não foi possível salvar a música: ${err}`)
+            return Errors.serverError('Sorry, we could not save this song. Try again later!')
         }
     }
 

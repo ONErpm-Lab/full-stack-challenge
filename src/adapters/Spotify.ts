@@ -2,6 +2,7 @@ import { SongMapper } from './../domain/mappers/SongMapper'
 import { Song } from './../domain/models/Song'
 import Variables from '../shared/configs/Variables'
 import fetch from 'node-fetch'
+import Errors from '../shared/core/ErrorHandler'
 
 export class Spotify {
 
@@ -25,7 +26,7 @@ export class Spotify {
 
             return song
         }catch (err) {
-            throw new Error(`Não foi possível encontrar a faixa desse ISRC, verifique se ela é válida e tente novamente!`)
+            throw Errors.failedDependency('Spotify API failed, please try again later!')
         }
     }
 
@@ -44,7 +45,7 @@ export class Spotify {
             return data.access_token
 
         } catch (error) {
-            throw new Error(`Não foi possível buscar os dados desta música, tente novamente mais tarde!`)
+            throw Errors.failedDependency('Spotify API failed, please try again later!')
         }
     }
 
