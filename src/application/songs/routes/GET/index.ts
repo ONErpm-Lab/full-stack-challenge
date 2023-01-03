@@ -5,9 +5,9 @@ const router = Router({ mergeParams: true })
 
 router.get('', async (req, res) => {
 
-    const {code, message, songsList} = await getSongsController.execute()
+    const result = await getSongsController.execute()
 
-    res.status(code).send([message, songsList])
+    res.status(result.code).send({ "Message": result.message, "Songs": result.data })
 
 })
 

@@ -1,4 +1,4 @@
-import { Song } from './../../../domain/models/Song';
+import { Song } from './../../../domain/models/Song'
 import Controller from "../../../shared/core/Controller"
 import { UseCase } from "../../../shared/core/UseCase"
 
@@ -11,16 +11,16 @@ export default class GetSongsController extends Controller {
         this.useCase = useCase
     }
 
-    public async execute() : Promise<{code: number, message: String, songsList?:Array<Song>}> {
+    public async execute() : Promise<any> {
 
         try {
-            const songsList: Array<Song> = await this.useCase.execute()
+            const songsList = await this.useCase.execute()
 
-            return {code: 200, message: 'Sucesso', songsList}
+            return songsList
 
-        } catch{
+        } catch (err) {
 
-            return {code: 500, message: ''}
+            return err
 
         }
 

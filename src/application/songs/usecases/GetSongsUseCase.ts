@@ -5,9 +5,14 @@ export default class GetSongsUseCase implements UseCase {
 
     public async execute() : Promise<any> {
 
-        const songsList = await songRepo.getAllSongs()
+        try {
+            const songsList = await songRepo.getAllSongs()
 
-        return songsList
+            return songsList
+
+        } catch (err) {
+            return err
+        }
     }
 
 }
