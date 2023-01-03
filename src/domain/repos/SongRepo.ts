@@ -1,12 +1,12 @@
-import Responses from '../../shared/core/Responses';
+import Responses from '../../shared/core/Responses'
 import Errors from "../../shared/core/ErrorHandler"
 import database from "../../shared/infra/Database"
 import { SongMapper } from "../mappers/SongMapper"
 import { Song } from "../models/Song"
 
 export interface ISongRepo {
-    getAllSongs(): Promise<Array<Song>>
-    getSong(id?: string): Promise<Song>
+    getAllSongs(): Promise<any>
+    getSong(id?: string): Promise<any>
     insertSong(songs: Song): Promise<any>
 }
 
@@ -27,22 +27,27 @@ export class SongRepo implements ISongRepo {
 
     }
 
-    async getAllSongs(): Promise<Array<Song>> {
+    async getAllSongs(): Promise<any> {
 
         const stmt = `
             SELECT * FROM spotify.songs
         `
+        try {
 
-        const result: Array<any> = await database.read(stmt)
+            const result: Array<any> = await database.read(stmt)
 
-        const songs = result.map(song => {
-            return SongMapper.toResponse(song)
-        })
+            const songsMapped = result.map(song => {
+                return SongMapper.toResponse(song)
+            })
 
-        return songs
+            return Responses.success({ data: songsMapped })
+
+        } catch (err) {
+            throw Errors.serverError('Sorry, we could not get the songs list. Try again later!')
+        }
     }
 
-    async getSong(id: string): Promise<Song> {
+    async getSong(id: string): Promise<any> {
 
         const stmt = `
             SELECT DISTINCT *
@@ -56,9 +61,12 @@ export class SongRepo implements ISongRepo {
 
             const song: Array<any> = await database.read(stmt, [ id ])
 
-            return SongMapper.toResponse(song[0])
+            const songMapped = SongMapper.toResponse(song[0])
+
+            return Responses.success({ data: songMapped })
+
         } catch (err) {
-            throw new Error(`Não foi possível encontrar a música com este ID`)
+            throw Errors.badRequest('Sorry, this id is not in the list')
         }
     }
 
@@ -80,8 +88,11 @@ export class SongRepo implements ISongRepo {
         }
 
         try {
+
             await database.write(stmt, [ songToInsert ])
-            return Responses.success('Song saved!')
+
+            return Responses.success({ message: 'Song saved!' })
+
         } catch (err) {
             return Errors.serverError('Sorry, we could not save this song. Try again later!')
         }

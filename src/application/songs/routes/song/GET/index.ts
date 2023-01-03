@@ -15,9 +15,9 @@ router.get('', async (req, res) => {
         baseUrl: req.baseUrl
     }
 
-    const {code, message, song} = await getSongController.execute(httpRequest)
+    const result = await getSongController.execute(httpRequest)
 
-    res.status(code).send([message, song])
+    res.status(result.code).send({ "Message": result.message, "Song": result.data })
 
 })
 

@@ -9,17 +9,17 @@ export default class GetSongController implements UseCase {
         this.useCase = useCase
     }
 
-    public async execute(req: any) : Promise<{code: number, message: String, song?:Song}> {
+    public async execute(req: any) : Promise<any> {
 
         try{
             const id = req.params.songId
 
-            const song: Song = await this.useCase.execute(id)
+            const song = await this.useCase.execute(id)
 
-            return {code: 200, message: 'Sucesso', song}
+            return song
 
         } catch (err) {
-            return {code: 500, message: `${err}`}
+            return err
         }
     }
 }

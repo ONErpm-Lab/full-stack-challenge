@@ -7,6 +7,7 @@ export default class GetSongUseCase implements UseCase {
     public async execute(id: string ) : Promise<Song> {
         try{
             const song = songRepo.getSong(id)
+
             return song
 
         } catch(err) {
