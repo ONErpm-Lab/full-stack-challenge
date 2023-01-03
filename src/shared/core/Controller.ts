@@ -10,6 +10,6 @@ export interface HttpRequest {
     ip: string
     method: string
     path: string
-    headers: { [key: string]: any },
+    headers: { [key: string]: any }
     baseUrl: string
 }
