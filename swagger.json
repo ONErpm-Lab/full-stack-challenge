@@ -9,7 +9,17 @@
     "paths": {
         "/songs": {
             "get": {
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Bad Requestet"
+                    },
+                    "500": {
+                        "description": "ServerError or Unexpected"
+                    }
+                }
             },
             "post": {
                 "parameters": [{
@@ -20,7 +30,16 @@
                 }],
                 "responses": {
                     "200": {
-                        "description": "Sucesso"
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Bad Requestet"
+                    },
+                    "424": {
+                        "description": "Failed Dependency"
+                    },
+                    "500": {
+                        "description": "ServerError or Unexpected"
                     }
                 }
             }
@@ -33,7 +52,17 @@
                     "type": "string",
                     "required": true
                 }],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Bad Requestet"
+                    },
+                    "500": {
+                        "description": "ServerErroror Unexpected"
+                    }
+                }
             }
         }
     }
