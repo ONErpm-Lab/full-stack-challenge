@@ -45,7 +45,8 @@ services:
   frontend:
     container_name: frontend
     image: node:lts
-    command: bash -c "cd frontend && npm start"
+    # command: bash -c "cd frontend && npm i && npm start"
+    command: tail -F anything
     ports:
       - 4200:4200
     volumes:

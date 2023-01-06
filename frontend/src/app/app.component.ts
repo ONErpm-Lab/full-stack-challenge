@@ -2,9 +2,14 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+  <app-header></app-header>
+  <div class="container" style="padding-top: 5rem;">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+  `
 })
 export class AppComponent {
-  title = 'full-stack-challenge-frontend';
+  title = 'Fullstack Challenge!';
 }

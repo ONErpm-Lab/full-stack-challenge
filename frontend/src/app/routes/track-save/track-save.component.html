@@ -1,0 +1,110 @@
+<app-seo [options]="{
+  title: 'Fullstack Challenge | Save Tracks'
+}"></app-seo>
+
+<form
+  class="row g-3 needs-validation"
+  novalidate [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  [ngClass]="{'was-validated': submitted}"
+>
+  <div class="col-md-4">
+    <label for="validationCustom01" class="form-label">First name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="validationCustom01"
+      value="Mark"
+      required
+      formControlName="firstname"
+      placeholder="Your First Name"
+    >
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Last name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="validationCustom02"
+      value="Otto"
+      required
+      formControlName="lastname"
+      placeholder="Your Last Name"
+    >
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationCustomUsername" class="form-label">Username</label>
+    <div class="input-group has-validation">
+      <span class="input-group-text" id="inputGroupPrepend">@</span>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustomUsername"
+        aria-describedby="inputGroupPrepend"
+        required
+        formControlName="username"
+        placeholder="Your User Name"
+      >
+      <div class="invalid-feedback">
+        Please choose a username.
+      </div>
+    </div>
+  </div>
+  <div formGroupName="address" class="row m-0 p-0 mt-2">
+    <div class="col-md-6">
+      <label for="validationCustom03" class="form-label">City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom03"
+        required
+        formControlName="city"
+        placeholder="Your City"
+      >
+      <div class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom05" class="form-label">Zip</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom05"
+        required
+        formControlName="zip"
+        placeholder="Your ZIP code"
+      >
+      <div class="invalid-feedback">
+        Please provide a valid zip.
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="debugCheck"
+        formControlName="debug"
+      >
+      <label class="form-check-label" for="debugCheck">
+        Enable Form Debug?
+      </label>
+    </div>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </div>
+</form>
+
+<div *ngIf="form.value.debug">
+  <app-form-debug [form]="form"></app-form-debug>
+</div>

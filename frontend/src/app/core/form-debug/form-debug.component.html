@@ -1,0 +1,15 @@
+<ng-template [ngIf]="form">
+  <div class="container border mt-5 p-5 mb-5">
+    <h2 style="text-align: center;">Form Debug</h2>
+    <pre><code>{{{
+        'touched': form.touched,
+        'untouched': form.untouched,
+        'dirty': form.dirty,
+        'pristine': form.pristine,
+        'invalid': form.invalid,
+        'valid': form.valid,
+        'status': form.status,
+        'value': form.value
+      } | json}}</code></pre>
+  </div>
+</ng-template>
