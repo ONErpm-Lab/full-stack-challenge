@@ -56,11 +56,9 @@ class TrackController extends Controller
 
             $track->save();
 
-            return response($request, 200);
-
-            // return response()->json([
-            //     "message" => "Track updated successfully"
-            // ], 200);
+            return response()->json([
+                "message" => "Track updated successfully"
+            ], 200);
         } else {
             return response()->json([
                 "message" => "Track not found"
