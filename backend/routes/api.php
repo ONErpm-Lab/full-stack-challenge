@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Track Routes
+
+Route::get('tracks', 'App\Http\Controllers\TrackController@getAllTracks');
+Route::get('tracks/{id}', 'App\Http\Controllers\TrackController@getTrack');
+Route::post('tracks', 'App\Http\Controllers\TrackController@createTrack');
+Route::put('tracks/{id}', 'App\Http\Controllers\TrackController@updateTrack');
+Route::delete('tracks/{id}','App\Http\Controllers\TrackController@deleteTrack');
