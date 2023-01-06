@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('spotify_id');
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

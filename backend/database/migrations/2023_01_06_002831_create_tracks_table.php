@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('spotify_url');
             $table->boolean('br_avaiable');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
