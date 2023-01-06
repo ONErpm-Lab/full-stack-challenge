@@ -3,32 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Track;
+use App\Models\Artist;
 
 class TrackController extends Controller
 {
     public function getAllTracks()
     {
-        $tracks = Track::get()->toJson(JSON_PRETTY_PRINT);
+        $tracks = Track::with("artists")->get()->toJson(JSON_PRETTY_PRINT);
         return response($tracks, 200);
     }
 
     public function createTrack(Request $request)
     {
-        $track = new Track;
+        DB::beginTransaction();
 
-        $track->isrc = $request->isrc;
-        $track->thumb_url = $request->thumb_url;
-        $track->release_date = $request->release_date;
-        $track->title = $request->title;
-        $track->length = $request->length;
+        try {
+            $json = $request->getContent();
 
-        $track->save();
+            $data = json_decode($json);
 
-        return response()->json([
-            "message" => "track record created"
-        ], 201);
+            $track = new Track;
+
+            $track->set($data);
+
+            unset($track["artists"]);
+
+            $track->save();
+
+            foreach ($data->artists as $artist_data) {
+                $artist = new Artist;
+
+                $artist->set($artist_data);
+
+                $artist->save();
+
+                $track->artists()->syncWithoutDetaching($artist->id);
+            }
+
+            DB::commit();
+
+            return response()->json([
+                "message" => "track record created"
+            ], 201);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     public function getTrack($id)
