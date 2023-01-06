@@ -1,0 +1,13 @@
+# syntax=docker/dockerfile:experimental
+
+FROM ubuntu:latest
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt update && apt upgrade
+
+RUN apt install mysql-client openssl -y
+
+RUN apt install php php-common php-curl php-json php-mbstring php-mysql php-xml php-zip -y
+
+RUN apt install composer -y

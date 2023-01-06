@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+
+  db:
+    container_name: db
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - ./.db:/var/lib/mysql
+    expose:
+      - 3306
+      - 33060
+
+  adminer:
+    container_name: adminer
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  backend:
+    container_name: backend
+    image: full-stack-challenge-backend
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
+    command: bash -c "sleep 5s && cd backend && php artisan migrate && php artisan serve"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/backend
+    depends_on:
+      - db
