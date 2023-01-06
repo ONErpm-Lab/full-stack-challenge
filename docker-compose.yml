@@ -31,7 +31,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-backend
-    command: bash -c "sleep 5s && cd backend && php artisan migrate && php artisan serve"
+    command: bash -c "sleep 5s && cd backend && php artisan migrate && php artisan serve --host=0.0.0.0"
     ports:
       - 8000:8000
     volumes:
