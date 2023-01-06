@@ -25,3 +25,11 @@ Route::get('tracks/{id}', 'App\Http\Controllers\TrackController@getTrack');
 Route::post('tracks', 'App\Http\Controllers\TrackController@createTrack');
 Route::put('tracks/{id}', 'App\Http\Controllers\TrackController@updateTrack');
 Route::delete('tracks/{id}','App\Http\Controllers\TrackController@deleteTrack');
+
+// Artist Routes
+
+Route::get('artists', 'App\Http\Controllers\ArtistController@getAllArtists');
+Route::get('artists/{id}', 'App\Http\Controllers\ArtistController@getArtist');
+Route::post('artists', 'App\Http\Controllers\ArtistController@createArtist');
+Route::put('artists/{id}', 'App\Http\Controllers\ArtistController@updateArtist');
+Route::delete('artists/{id}','App\Http\Controllers\ArtistController@deleteArtist');
