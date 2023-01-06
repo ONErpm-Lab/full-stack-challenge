@@ -31,8 +31,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-backend
+    restart: always
     command: bash -c "
-        sleep 5s && cd backend && php artisan optimize:clear && php artisan lrd:generate &&
+        cd backend && php artisan optimize:clear && php artisan lrd:generate &&
         php artisan migrate && php artisan serve --host=0.0.0.0"
     ports:
       - 8000:8000
