@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('isrc');
             $table->string('thumb_url');
-            $table->string('release_date');
+            $table->dateTime('release_date');
             $table->string('title');
             $table->string('length');
+            $table->string('spotify_url');
+            $table->boolean('br_avaiable');
             $table->timestamps();
         });
     }
