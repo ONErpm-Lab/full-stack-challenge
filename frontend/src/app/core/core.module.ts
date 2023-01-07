@@ -5,6 +5,7 @@ import { FooterModule } from './footer/footer.module';
 import { FormDebugModule } from './form-debug/form-debug.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SeoModule } from './seo/seo.module';
+import { HttpClientModule } from '@angular/common/http';
 
 const coreModules = [
   FormsModule,
@@ -13,6 +14,7 @@ const coreModules = [
   HeaderModule,
   FooterModule,
   FormDebugModule,
+  HttpClientModule,
 ];
 
 @NgModule({
