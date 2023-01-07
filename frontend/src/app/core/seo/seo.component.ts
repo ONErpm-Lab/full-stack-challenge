@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { ISEO } from '../types';
+import { ISEO } from '../interfaces/seo.inteface';
 
 @Component({
   selector: 'app-seo',

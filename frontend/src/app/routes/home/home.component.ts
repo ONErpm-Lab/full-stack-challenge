@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SpotifyService } from 'src/app/core/services/spotify.service';
 
 
 
@@ -9,9 +10,14 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private readonly router: Router,
+    private readonly spotifyService: SpotifyService,
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.spotifyService.login();
+  }
 
   goToCreateTracks() {
     this.router.navigate(['/tracks/save']);
