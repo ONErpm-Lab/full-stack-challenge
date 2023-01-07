@@ -33,3 +33,7 @@ Route::get('artists/{id}', 'App\Http\Controllers\ArtistController@getArtist');
 Route::post('artists', 'App\Http\Controllers\ArtistController@createArtist');
 Route::put('artists/{id}', 'App\Http\Controllers\ArtistController@updateArtist');
 Route::delete('artists/{id}','App\Http\Controllers\ArtistController@deleteArtist');
+
+// Spotify Token
+
+Route::get('spotify/token', 'App\Http\Controllers\SpotifyController@token');

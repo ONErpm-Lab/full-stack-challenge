@@ -212,4 +212,6 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'SPOTIFY_CLIENT_ID' => env('SPOTIFY_CLIENT_ID'),
+    'SPOTIFY_CLIENT_SECRET' => env('SPOTIFY_CLIENT_SECRET'),
 ];
