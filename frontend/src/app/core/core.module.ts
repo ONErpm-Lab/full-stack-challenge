@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderModule } from './header/header.module';
-import { FooterModule } from './footer/footer.module';
-import { FormDebugModule } from './form-debug/form-debug.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SeoModule } from './seo/seo.module';
 import { HttpClientModule } from '@angular/common/http';
+
+import { FooterModule } from './components/footer/footer.module';
+import { FormDebugModule } from './components/form-debug/form-debug.module';
+import { HeaderModule } from './components/header/header.module';
+import { SeoModule } from './components/seo/seo.module';
 
 const coreModules = [
   FormsModule,
