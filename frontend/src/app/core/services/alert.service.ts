@@ -41,14 +41,14 @@ export class AlertService {
     });
   }
 
-  async onError() {
+  async onError(title?: string, message?: string) {
     return this.alert.fire({
       allowOutsideClick: false,
       allowEnterKey: false,
       allowEscapeKey: false,
       icon: "error",
-      title: "Error!",
-      text: "Ops, there was an error, please contact the IT sector!",
+      title: title || "Error!",
+      text: message || "Ops, there was an error, please contact the IT sector!",
     });
   }
 
