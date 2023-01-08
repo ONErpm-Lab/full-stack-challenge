@@ -64,6 +64,11 @@ git clone https://github.com/cassiofb-dev/full-stack-challenge
 
 cd full-stack-challenge
 
+# Before starting make sure you created a env file
+# based on backend/.env.example file if you wish
+# you can use the example values, you only really need
+# to get spotify api client id and key
+
 docker compose up -d
 ```
 
