@@ -11,10 +11,10 @@ export class SeoComponent implements OnInit {
   constructor(private titleService: Title, private metaService: Meta) { }
 
   ngOnInit(): void {
-    const url = this.options?.url || 'https://cassio.github.io/full-stack-challenge/';
-    const title = this.options?.title || 'Fullstack Challenge | Backend (Laravel) + Frontend (Angular)';
-    const description = this.options?.description || 'ONErpm Fullstack Challenge!';
-    const metaImage = this.options?.metaImage || 'https://cassio.github.io/full-stack-challenge/assets/logo.png';
+    const url = this.options?.url || 'https://onerpm-full-stack-challenge.vercel.app/';
+    const title = this.options?.title || 'Fullstack Challenge!';
+    const description = this.options?.description || 'ONErpm Fullstack Challenge | Backend (Laravel) + Frontend (Angular)';
+    const metaImage = this.options?.metaImage || 'https://onerpm-full-stack-challenge.vercel.app/assets/logo.png';
 
     this.titleService.setTitle(title);
     this.metaService.addTags([
