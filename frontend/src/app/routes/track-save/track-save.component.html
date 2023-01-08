@@ -2,108 +2,117 @@
   title: 'Fullstack Challenge | Save Tracks'
 }"></app-seo>
 
-<form
-  class="row g-3 needs-validation"
-  novalidate [formGroup]="form"
-  (ngSubmit)="onSubmit()"
-  [ngClass]="{'was-validated': submitted}"
->
-  <div class="col-md-4">
-    <label for="validationCustom01" class="form-label">First name</label>
-    <input
-      type="text"
-      class="form-control"
-      id="validationCustom01"
-      value="Mark"
-      required
-      formControlName="firstname"
-      placeholder="Your First Name"
-    >
-    <div class="valid-feedback">
-      Looks good!
-    </div>
-  </div>
-  <div class="col-md-4">
-    <label for="validationCustom02" class="form-label">Last name</label>
-    <input
-      type="text"
-      class="form-control"
-      id="validationCustom02"
-      value="Otto"
-      required
-      formControlName="lastname"
-      placeholder="Your Last Name"
-    >
-    <div class="valid-feedback">
-      Looks good!
-    </div>
-  </div>
-  <div class="col-md-4">
-    <label for="validationCustomUsername" class="form-label">Username</label>
-    <div class="input-group has-validation">
-      <span class="input-group-text" id="inputGroupPrepend">@</span>
-      <input
-        type="text"
-        class="form-control"
-        id="validationCustomUsername"
-        aria-describedby="inputGroupPrepend"
-        required
-        formControlName="username"
-        placeholder="Your User Name"
-      >
+<!-- START ISRC SEARCH FORM -->
+
+<form class="g-3 needs-validation" novalidate [formGroup]="form" (ngSubmit)="onSubmit()"
+  [ngClass]="{'was-validated': submitted}">
+  <div class="row mb-2">
+    <div class="col-md-12">
+      <label for="isrc" class="form-label">Tracks ISRC</label>
+      <input type="text" class="form-control" id="isrc" value="Mark" required formControlName="isrc"
+        placeholder="Type a ISRC to search tracks...">
+      <div class="valid-feedback">
+        Looks good!
+      </div>
       <div class="invalid-feedback">
-        Please choose a username.
+        Please type a ISRC...
       </div>
     </div>
   </div>
-  <div formGroupName="address" class="row m-0 p-0 mt-2">
-    <div class="col-md-6">
-      <label for="validationCustom03" class="form-label">City</label>
-      <input
-        type="text"
-        class="form-control"
-        id="validationCustom03"
-        required
-        formControlName="city"
-        placeholder="Your City"
-      >
-      <div class="invalid-feedback">
-        Please provide a valid city.
+  <div class="row">
+    <div class="col-md-12">
+      <div class="float-start">
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </div>
+      <div class="float-end">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="debugCheck" formControlName="debug">
+          <label class="form-check-label" for="debugCheck">
+            Enable Form Debug?
+          </label>
+        </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <label for="validationCustom05" class="form-label">Zip</label>
-      <input
-        type="text"
-        class="form-control"
-        id="validationCustom05"
-        required
-        formControlName="zip"
-        placeholder="Your ZIP code"
-      >
-      <div class="invalid-feedback">
-        Please provide a valid zip.
-      </div>
-    </div>
-  </div>
-  <div class="col-12">
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        value=""
-        id="debugCheck"
-        formControlName="debug"
-      >
-      <label class="form-check-label" for="debugCheck">
-        Enable Form Debug?
-      </label>
-    </div>
-  </div>
-  <div class="col-12">
-    <button class="btn btn-primary" type="submit">Submit form</button>
   </div>
 </form>
+
+<!-- END ISRC SEARCH FORM -->
+
+<hr>
+
+<!-- START TRACK RESULTS -->
+
+<ng-container *ngIf="spotifyTracks.length > 0; else elseTemplate">
+
+  <p>Showing {{spotifyTracks.length}} tracks</p>
+
+  <hr>
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+      <!-- START TRACK CARDS LOOP -->
+
+      <div class="col" *ngFor="let track of spotifyTracks; index as index">
+        <div class="card shadow-sm">
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{track.album.images[0].url}}">
+          <div class="card-body p-2">
+            <h4 class="text-center position-relative">
+              <a href="{{track.external_urls.spotify}}" target="_blank" rel="noopener noreferrer">
+                {{track.name}}
+              </a>
+              <span *ngIf="isBrAvaialbe(track)" class="position-absolute top-0 start-100 translate-middle badge bg-success">BR</span>
+            </h4>
+            <audio controls class="w-100">
+              <source src="{{track.preview_url}}">
+            </audio>
+            <hr>
+            <div class="accordion" id="accordion{{index}}">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{index}}">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    attr.data-bs-target="#collapse{{index}}" aria-expanded="false"
+                    attr.aria-controls="collapse{{index}}">
+                    Released on {{track.album.release_date | date:'MM/dd/yy' }}<br>
+                    By the artists bellow...
+                  </button>
+                </h2>
+                <div id="collapse{{index}}" class="accordion-collapse collapse" attr.aria-labelledby="heading{{index}}"
+                  attr.data-bs-parent="#accordion{{index}}">
+                  <div class="accordion-body">
+                    <ol>
+                      <li *ngFor="let artist of track.artists; let index=index">
+                        {{artist.name}}
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-success">Save</button>
+                <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+              </div>
+              <small class="text-muted">Length: {{millisecondsToMinutes(track.duration_ms)}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- END TRACK CARDS LOOP -->
+
+    </div>
+  </div>
+
+</ng-container>
+
+<ng-template #elseTemplate>
+  <h1>No track was found.</h1>
+  <p>Click search button to load tracks or check your ISRC...</p>
+</ng-template>
+
+<!-- END TRACK RESULTS -->
 
 <div *ngIf="form.value.debug">
   <app-form-debug [form]="form"></app-form-debug>

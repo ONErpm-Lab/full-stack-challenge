@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 
 import SpotifyWebApi from "spotify-web-api-js";
 
@@ -12,19 +11,30 @@ export class SpotifyService {
   private readonly spotifyApi = new SpotifyWebApi();
 
   constructor(
-    private readonly http: HttpClient,
     private readonly backendService: BackendService,
   ) { }
 
   async login() {
+    const hasToken = this.spotifyApi.getAccessToken();
+
+    if (hasToken) return;
+
     const token = await this.backendService.getSpotifyToken();
 
     this.spotifyApi.setAccessToken(token);
-
-    console.log("access token OK!");
   }
 
-  getByISRC(isrc: string) {
-    console.log("not implemented");
+  async getTracksByISRC(isrc: string) {
+    await this.login();
+
+    const response = await this.spotifyApi.search(`isrc=${isrc}`, ["track"]);
+
+    const tracks = response.tracks;
+
+    return tracks;
+  }
+
+  isAvaialbe(country: string, track: SpotifyApi.TrackObjectFull) {
+    return Boolean(track.available_markets?.filter(market => market === country).length);
   }
 }

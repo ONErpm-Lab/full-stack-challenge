@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
   <app-header></app-header>
-  <div class="container" style="padding-top: 5rem;">
+  <div class="container px-2" style="padding-top: 5rem;">
     <router-outlet></router-outlet>
   </div>
   <app-footer></app-footer>
