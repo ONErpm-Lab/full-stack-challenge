@@ -35,7 +35,7 @@ export class BackendService {
   getTrack() { }
 
   async saveTrack(spotifyTrack: SpotifyApi.TrackObjectFull | any) {
-    const track: ITrack = { 
+    const track: Partial<ITrack> = { 
       isrc: spotifyTrack.external_ids.isrc,
       thumb_url: spotifyTrack.album.images[0].url,
       release_date: spotifyTrack.album.release_date,
@@ -59,7 +59,10 @@ export class BackendService {
   }
 
   updateTrack() { }
-  deleteTrack() { }
+
+  async deleteTrack(id: number) {
+    await firstValueFrom(this.http.delete(`${this.backendUrl}/tracks/${id}`));
+  }
 
   getAllArtists() { }
   getArtist() { }
