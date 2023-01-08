@@ -33,7 +33,8 @@ services:
       dockerfile: Dockerfile-backend
     restart: always
     command: bash -c "
-        cd backend && php artisan optimize:clear && php artisan lrd:generate &&
+        cd backend && composer install && php artisan vendor:publish --tag=request-docs-config &&
+        php artisan optimize:clear && php artisan lrd:generate &&
         php artisan migrate && php artisan serve --host=0.0.0.0"
     ports:
       - 8000:8000
