@@ -42,6 +42,7 @@ export class BackendService {
       title: spotifyTrack.name,
       spotify_url: spotifyTrack.external_urls.spotify,
       preview_url: spotifyTrack.preview_url,
+      spotify_id: spotifyTrack.id,
       br_avaiable: this.utilsService.isAvaiable("BR", spotifyTrack),
       length: this.utilsService.millisecondsTommssFormat(spotifyTrack.duration_ms),
     };

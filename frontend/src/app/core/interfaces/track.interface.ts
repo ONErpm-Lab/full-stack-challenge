@@ -10,5 +10,6 @@ export interface ITrack {
     spotify_url: string,
     preview_url: string,
     br_avaiable: boolean,
+    spotify_id: string,
     artists: IArtist[],
 }

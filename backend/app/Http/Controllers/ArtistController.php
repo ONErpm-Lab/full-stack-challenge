@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use App\Models\Artist;
 
@@ -11,7 +12,7 @@ class ArtistController extends Controller
     public function getAllArtists()
     {
         $artists = Artist::get()->toJson(JSON_PRETTY_PRINT);
-        return response($artists, 200);
+        return response($artists, Response::HTTP_OK);
     }
 
     public function createArtist(Request $request)
@@ -24,19 +25,19 @@ class ArtistController extends Controller
         $artist->save();
 
         return response()->json([
-            "message" => "artist record created"
-        ], 201);
+            "message" => "Artist saved!"
+        ], Response::HTTP_CREATED);
     }
 
     public function getArtist($id)
     {
         if (Artist::where('id', $id)->exists()) {
             $artist = Artist::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
-            return response($artist, 200);
+            return response($artist, Response::HTTP_OK);
         } else {
             return response()->json([
-                "message" => "Artist not found"
-            ], 404);
+                "message" => "Artist not found!"
+            ], Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -51,12 +52,12 @@ class ArtistController extends Controller
             $artist->save();
 
             return response()->json([
-                "message" => "Artist updated successfully"
-            ], 200);
+                "message" => "Artist updated!"
+            ], Response::HTTP_OK);
         } else {
             return response()->json([
-                "message" => "Artist not found"
-            ], 404);
+                "message" => "Artist not found!"
+            ], Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -68,12 +69,12 @@ class ArtistController extends Controller
             $artist->delete();
 
             return response()->json([
-                "message" => "Artist deleted"
-            ], 202);
+                "message" => "Artist deleted!"
+            ], Response::HTTP_ACCEPTED);
         } else {
             return response()->json([
-                "message" => "Artist not found"
-            ], 404);
+                "message" => "Artist not found!"
+            ], Response::HTTP_NOT_FOUND);
         }
     }
 }

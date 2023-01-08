@@ -11,7 +11,7 @@ class Track extends Model
 
     protected $table = 'tracks';
 
-    protected $fillable = ['isrc', 'thumb_url', 'release_date', 'title', 'length', 'spotify_url', 'br_avaiable', 'preview_url'];
+    protected $fillable = ['isrc', 'thumb_url', 'release_date', 'title', 'length', 'spotify_url', 'br_avaiable', 'preview_url', 'spotify_id'];
 
     public function set($data)
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\Response;
 
 class SpotifyController extends Controller
 {
@@ -25,6 +26,6 @@ class SpotifyController extends Controller
             ],
         ]);
 
-        return response()->json(json_decode($response->getBody()));
+        return response($response->getBody(), Response::HTTP_OK);
     }
 }
