@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { BackendService } from 'src/app/core/services/backend.service';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
 
@@ -15,6 +16,7 @@ export class TrackSaveComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly spotifyService: SpotifyService,
     private readonly utilsService: UtilsService,
+    private readonly backendService: BackendService,
   ) { }
 
   submitted: boolean = false;
@@ -43,7 +45,11 @@ export class TrackSaveComponent implements OnInit {
     return this.utilsService.millisecondsTommssFormat(milliseconds);
   }
 
-  isBrAvaialbe(track: SpotifyApi.TrackObjectFull) {
-    return this.spotifyService.isAvaialbe("BR", track);
+  isBrAvaiable(track: SpotifyApi.TrackObjectFull) {
+    return this.utilsService.isAvaiable("BR", track);
+  }
+
+  async onClickSave(track: SpotifyApi.TrackObjectFull) {
+    await this.backendService.saveTrack(track);
   }
 }

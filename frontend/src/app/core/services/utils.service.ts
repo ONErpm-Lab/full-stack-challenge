@@ -18,4 +18,8 @@ export class UtilsService {
 
     return mmssFormat;
   }
+
+  isAvaiable(country: string, track: SpotifyApi.TrackObjectFull) {
+    return Boolean(track.available_markets?.filter(market => market === country).length);
+  }
 }
