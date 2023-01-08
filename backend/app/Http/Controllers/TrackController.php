@@ -76,6 +76,9 @@ class TrackController extends Controller
             $track->release_date = is_null($request->release_date) ? $track->release_date : $request->release_date;
             $track->title = is_null($request->title) ? $track->title : $request->title;
             $track->length = is_null($request->length) ? $track->length : $request->length;
+            $track->spotify_url = is_null($request->spotify_url) ? $track->spotify_url : $request->spotify_url;
+            $track->preview_url = is_null($request->preview_url) ? $track->preview_url : $request->preview_url;
+            $track->br_avaiable = is_null($request->br_avaiable) ? $track->br_avaiable : $request->br_avaiable;
 
             $track->save();
 

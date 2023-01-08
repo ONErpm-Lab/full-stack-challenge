@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('length');
             $table->string('spotify_url');
+            $table->string('preview_url');
             $table->boolean('br_avaiable');
             $table->timestamps();
             $table->softDeletes();
