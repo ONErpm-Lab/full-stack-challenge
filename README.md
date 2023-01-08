@@ -22,7 +22,7 @@ This project for applying as Fullstack developer at ONErpm. As required, the bac
 ## Features
 
 Frontend demo on (Backend features will not work ):
-[https://full-stack-challenge.vercel.app/](https://full-stack-challenge.vercel.app/)
+[https://onerpm-full-stack-challenge.vercel.app/home](https://onerpm-full-stack-challenge.vercel.app/home)
 
 - Search tracks on Spotify with ISRC
 - See info about the track
