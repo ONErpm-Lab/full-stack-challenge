@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ITrack } from 'src/app/core/interfaces/track.interface';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { BackendService } from 'src/app/core/services/backend.service';
+import { MockService } from 'src/app/core/services/mock.service';
 
 
 
@@ -14,6 +15,7 @@ export class TrackListComponent implements OnInit {
   constructor(
     private readonly backendService: BackendService,
     private readonly alertService: AlertService,
+    private readonly mockService: MockService,
   ) { }
 
   tracks: ITrack[] = [];
@@ -23,9 +25,18 @@ export class TrackListComponent implements OnInit {
   }
 
   async getAllTracks() {
-    const tracks = await this.backendService.getAllTracks();
+    try {
+      const tracks = await this.backendService.getAllTracks();
+  
+      this.tracks = tracks;
+    } catch (error) {
+      await this.alertService.onError(
+        "Backend is down!",
+        "Backend server could not be accessed, loading mock data...",
+      );
 
-    this.tracks = tracks;
+      this.tracks = this.mockService.getAllTracks();
+    }
   }
 
   async onClickDelete(track: ITrack) {
