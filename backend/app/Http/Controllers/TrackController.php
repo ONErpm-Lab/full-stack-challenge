@@ -20,34 +20,33 @@ class TrackController extends Controller
 
     public function createTrack(Request $request)
     {
-        if (!Track::where('spotify_id', $request->spotify_id)->exists()) {
+        if (!Track::where("spotify_id", $request->spotify_id)->exists()) {
             DB::beginTransaction();
-    
+
             try {
                 $json = $request->getContent();
-    
+
                 $data = json_decode($json);
-    
+
                 $track = new Track;
-    
+
                 $track->set($data);
-    
+
                 unset($track["artists"]);
-    
+
                 $track->save();
-    
+
                 foreach ($data->artists as $artist_data) {
-                    $artist = new Artist;
-    
-                    $artist->set($artist_data);
-    
-                    $artist->save();
+                    $artist = Artist::firstOrCreate(
+                        ["spotify_id" => $artist_data->spotify_id],
+                        ["name" => $artist_data->name],
+                    );
     
                     $track->artists()->syncWithoutDetaching($artist->id);
                 }
-    
+
                 DB::commit();
-    
+
                 return response()->json([
                     "message" => "Track saved!"
                 ], Response::HTTP_CREATED);
@@ -64,8 +63,8 @@ class TrackController extends Controller
 
     public function getTrack($id)
     {
-        if (Track::where('id', $id)->exists()) {
-            $track = Track::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+        if (Track::where("id", $id)->exists()) {
+            $track = Track::where("id", $id)->get()->toJson(JSON_PRETTY_PRINT);
             return response($track, Response::HTTP_OK);
         } else {
             return response()->json([
@@ -76,7 +75,7 @@ class TrackController extends Controller
 
     public function updateTrack(Request $request, $id)
     {
-        if (Track::where('id', $id)->exists()) {
+        if (Track::where("id", $id)->exists()) {
             $track = Track::find($id);
 
             $track->isrc = is_null($request->isrc) ? $track->isrc : $request->isrc;
@@ -103,7 +102,7 @@ class TrackController extends Controller
 
     public function deleteTrack($id)
     {
-        if (Track::where('id', $id)->exists()) {
+        if (Track::where("id", $id)->exists()) {
             $track = Track::find($id);
 
             $track->delete();
