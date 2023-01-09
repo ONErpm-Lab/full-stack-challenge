@@ -27,7 +27,7 @@ export class SpotifyService {
   async getTracksByISRC(isrc: string) {
     await this.login();
 
-    const response = await this.spotifyApi.search(`isrc=${isrc}`, ["track"]);
+    const response = await this.spotifyApi.search(`isrc:${isrc}`, ["track"]);
 
     const tracks = response.tracks;
 
