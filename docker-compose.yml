@@ -32,8 +32,10 @@ services:
       context: .
       dockerfile: Dockerfile-backend
     restart: always
-    command: bash -c "
-        cd backend && composer install && php artisan vendor:publish --tag=request-docs-config &&
+    working_dir: "/backend"
+    command: sh -c "
+        composer install && composer update --with-dependencies &&
+        php artisan vendor:publish --tag=request-docs-config &&
         php artisan optimize:clear && php artisan lrd:generate &&
         php artisan migrate && php artisan serve --host=0.0.0.0"
     ports:
@@ -45,8 +47,9 @@ services:
 
   frontend:
     container_name: full-stack-challenge-frontend
-    image: node:lts
-    command: bash -c "cd frontend && npm i && npm start"
+    image: node:lts-alpine
+    working_dir: "/frontend"
+    command: sh -c "npm i && npm start"
     ports:
       - 4200:4200
     volumes:

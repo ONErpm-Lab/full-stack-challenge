@@ -1,13 +1,13 @@
 # syntax=docker/dockerfile:experimental
 
-FROM ubuntu:latest
+FROM alpine:latest
 
-ARG DEBIAN_FRONTEND=noninteractive
+RUN apk -U upgrade
 
-RUN apt update && apt upgrade
-
-RUN apt install mysql-client openssl -y
-
-RUN apt install php php-common php-curl php-json php-mbstring php-mysql php-xml php-zip -y
-
-RUN apt install composer -y
+RUN apk add php81 php81-common \
+    php81-curl php81-dom php81-fileinfo php81-fpm \
+    php81-iconv php81-mbstring php81-openssl \
+    php81-pdo php81-pdo_mysql php81-phar \
+    php81-session php81-tokenizer \
+    php81-xml php81-xmlwriter php81-xmlreader \
+    php81-zip composer
