@@ -38,6 +38,7 @@ services:
       - 8080:8080
     depends_on:
       - db
+      - db-dev
 
   backend:
     container_name: backend
@@ -58,7 +59,7 @@ services:
     volumes:
       - ./backend:/backend
     depends_on:
-      - db
+      - adminer
 
   frontend:
     container_name: full-stack-challenge-frontend
