@@ -16,6 +16,20 @@ services:
       - 3306
       - 33060
 
+  db-dev:
+    container_name: db-dev
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: db-dev
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - ./.db-dev:/var/lib/mysql
+    expose:
+      - 3307
+      - 33061
+
   adminer:
     container_name: adminer
     image: adminer:latest
@@ -33,6 +47,7 @@ services:
       dockerfile: Dockerfile-backend
     restart: always
     working_dir: "/backend"
+    # command: tail -f /dev/null
     command: sh -c "
         composer install && composer update --with-dependencies &&
         php artisan vendor:publish --tag=request-docs-config &&
