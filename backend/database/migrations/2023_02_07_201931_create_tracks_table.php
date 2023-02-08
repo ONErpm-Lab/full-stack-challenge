@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tracks', function (Blueprint $table) {
-            $table->id();
+            $table->comment('');
+            $table->bigIncrements('id');
             $table->string('isrc');
             $table->string('thumb_url');
             $table->dateTime('release_date');

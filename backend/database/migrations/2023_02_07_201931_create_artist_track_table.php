@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('artists', function (Blueprint $table) {
-            $table->id();
-            $table->string('spotify_id');
-            $table->string('name');
+        Schema::create('artist_track', function (Blueprint $table) {
+            $table->comment('');
+            $table->bigIncrements('id');
+            $table->unsignedInteger('artist_id');
+            $table->unsignedInteger('track_id');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('artists');
+        Schema::dropIfExists('artist_track');
     }
 };
