@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('secondary')->create('artist_track', function (Blueprint $table) {
-            $table->comment('');
-            $table->bigIncrements('id');
-            $table->unsignedInteger('artist_id');
-            $table->unsignedInteger('track_id');
-            $table->timestamps();
-        });
+        {
+            Schema::connection('main')->createDatabase('contents');
+            Schema::connection('main')->createDatabase('accounts');
+        }
     }
 
     /**
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection('secondary')->dropIfExists('artist_track');
+        Schema::connection('accounts')->dropIfExists('users');
     }
 };
