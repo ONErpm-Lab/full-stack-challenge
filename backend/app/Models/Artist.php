@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Artist extends Model
 {
+    use HasFactory;
     use SoftDeletes;
 
     protected $table = 'artists';
@@ -20,7 +22,7 @@ class Artist extends Model
         }
     }
 
-    public function artists()
+    public function tracks()
     {
         return $this->belongsToMany(Track::class);
     }
