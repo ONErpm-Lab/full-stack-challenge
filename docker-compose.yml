@@ -8,7 +8,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_DATABASE: main
+      MYSQL_DATABASE: default
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./.main-database:/var/lib/mysql
@@ -22,19 +22,22 @@ services:
     restart: always
     environment:
       MYSQL_TCP_PORT: 3307
-      MYSQL_DATABASE: secondary
+      MYSQL_DATABASE: default
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./.secondary-database:/var/lib/mysql
     expose:
       - 3307
 
-  adminer:
-    container_name: adminer
-    image: adminer:latest
+  database-manager:
+    container_name: database-manager
+    image: phpmyadmin:latest
     restart: always
     ports:
       - 8080:8080
+    environment:
+      PMA_ARBITRARY: 1
+      APACHE_PORT: 8080
     depends_on:
       - main-database
       - secondary-database
@@ -57,7 +60,7 @@ services:
     volumes:
       - ./backend:/backend
     depends_on:
-      - adminer
+      - database-manager
 
   frontend:
     container_name: full-stack-challenge-frontend
