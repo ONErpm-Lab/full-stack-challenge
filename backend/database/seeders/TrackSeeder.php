@@ -18,7 +18,7 @@ class TrackSeeder extends Seeder
     public function run()
     {
         Track::factory()
-            ->count(1000)
+            ->count(10)
             ->hasArtists(5)
             ->create();
     }

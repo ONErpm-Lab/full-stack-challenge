@@ -18,8 +18,8 @@ class ArtistSeeder extends Seeder
     public function run()
     {
         Artist::factory()
-            ->count(1000)
-            ->hasTracks(5)
+            ->count(5)
+            ->hasTracks(10)
             ->create();
     }
 }
