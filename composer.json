@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "brenovix/onerpm-full-stack-challenge",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "ONErpm Challenge",
+    "keywords": ["framework", "laravel", "ONErpm"],
     "license": "MIT",
     "require": {
         "php": "^8.1",
