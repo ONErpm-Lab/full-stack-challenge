@@ -48,7 +48,7 @@ class TrackService
             $data = $this->getFromSpotify($isrc);
             if (!empty($data)) {
                 $this->store($data);
-            } elseif(env('ENABLE_DEEZER_API')) {
+            } elseif(env('ENABLE_DEEZER_API', false)) {
                 $data = $this->getFromDeezer($isrc);
                 if (!empty($data)) $this->store($data);
             }

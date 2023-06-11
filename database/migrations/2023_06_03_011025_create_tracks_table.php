@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tracks', function (Blueprint $table) {
             $table->id();
-            $table->string('isrc')->unique()->nullable(false);
-            $table->string('title', 30)->nullable(false);
+            $table->string('isrc', 12)->unique()->nullable(false);
+            $table->string('title', 50)->nullable(false);
             $table->unsignedBigInteger('album_id');
             $table->integer('duration')->nullable(false);
             $table->string('external_url')->nullable(false);
