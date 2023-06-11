@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Track {
+  @@map("tracks")
+  id Int @id @default(autoincrement())
+  isrc String @unique
+  thumb String
+  release_date DateTime
+  name String
+  artists String  //Na versao completa deve ser uma relacao many to many
+  duration Int
+  link_preview String //previa
+  link_spotify String
+  available_in_brazil Boolean //Na versao completa deve ser uma relacao many to many
+}
+
+

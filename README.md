@@ -1,3 +1,26 @@
+este projeto usa angular 16 
+para compilar o projeto use:
+npm install
+para executar: 
+npm start
+
+este projeto usa 
+ "@prisma/client": "^4.15.0",
+    "axios": "^1.4.0",
+    "express": "^4.18.2"
+
+configurar a url do banco no arquivo .env
+para executar a criaçao do banco em mysql:
+npx prisma migrate dev
+para criar o client:
+npx prisma generate 
+para executar:
+npm start
+
+este projeto vai expor uma api rest para gerenciar as tracks:
+get /tracks para listar
+post /tracks para criar
+
 ## Início
 
 Bem vindo ao mundo da música!

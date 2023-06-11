@@ -1,0 +1,40 @@
+
+.page__search{
+  background-color: #B5CAD1;
+}
+.form{
+  background: var(--white);
+  height: 35em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.div-input{
+  position: relative;
+  margin: 1em;
+  width: 30%;
+}
+
+.input {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  outline: none;
+  height: 30px;
+  border-radius: 5px;
+  border: 2px solid #313030;
+}
+
+.inputBtn {
+  position: absolute;
+  border-radius: 5px;
+  right: 0px;
+  border: none;
+  top: 2px;
+  height: 30px;
+  cursor: pointer;
+  color: white;
+  background-color: #F06221;
+  transform: translateX(2px);
+}
