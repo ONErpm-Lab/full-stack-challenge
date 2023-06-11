@@ -20,9 +20,24 @@ describe("Testing trackService.js", () => {
   });
 
   it("should throw error if the service list promise fails", async () => {
+    
+    const expectedError = new Error("Error listing tracks.");
+    
     TrackRepository.listAll = jest.fn();
-    TrackRepository.listAll.mockRejectValue("error");
+    TrackRepository.listAll.mockRejectedValue(expectedError);
 
-    expect(TrackService.listAll()).rejects.toMatch("error");
+    const error = await TrackService.listAll().catch(error=>error)
+    expect(error).toStrictEqual(expectedError);
+  })
+
+  it("should throw error if the track already exists", async () => {
+    
+    const expectedError = new Error("This track is already exists");
+
+    TrackRepository.findByISRC = jest.fn();
+    TrackRepository.findByISRC.mockResolvedValue({name:"Track that already exists"});
+
+    const error = await TrackService.findByISRC("ISRC").catch(error=>error)
+    expect(error).toStrictEqual(expectedError);
   })
 })
