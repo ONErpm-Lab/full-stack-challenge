@@ -17,15 +17,18 @@ export class ListComponent implements OnInit {
   isrcForm = new FormGroup({
     isrc: new FormControl('')
   });
+
   showModal = false
 
   message = "";
-  ngOnInit() {
+  list() {
     this.apiService.listDbTracks().subscribe((result) => {
       this.trackList = result;
       console.log(this.trackList[0].link_spotify)
     })
   }
+
+  ngOnInit() {this.list()}
 
   searchInDb() {
     if (this.isrcForm.valid) {
@@ -46,5 +49,7 @@ export class ListComponent implements OnInit {
 
   hideModal() {
     this.showModal = false
+    this.isrcForm.reset()
+    this.list()
   }
 }

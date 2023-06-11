@@ -1,10 +1,12 @@
 .footer {
+  width: 100%;
+  height: 18vh;
+  box-sizing: border-box;
   background-color: #313030;
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 0;
-  padding: 1rem 1.5rem 0 1.5rem;
+  padding: 1.5rem;
 }
 
 .text {
@@ -14,17 +16,29 @@
 }
 
 .text2 {
+  padding: 0.5rem;
+  color: white;
   font-size: 1.25rem;
 }
 
 .anchors {
   display: flex;
   justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .anchor img {
   width: 2rem;
   height: 2rem;
-  padding: 0.5rem 1rem 0.5rem 1rem;
   display: inline;
+}
+
+@media (max-width: 400px) {
+  .text {
+    font-size: 1.25rem;
+  }
+  .text2 {
+    font-size: 1rem;
+  }
 }

@@ -1,14 +1,15 @@
 .navBar {
   background-color: #313030;
   display: flex;
+  align-items: center;
+  height: 25vh;
 }
 
 .nav {
   width: 100%;
-  padding: 1rem 1.5rem;
+  padding: 2rem 1.5rem;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .ulLinks {
@@ -18,7 +19,7 @@
 }
 
 .logo {
-  width: 300px;
+  width: 500px;
 }
 
 .logo img {

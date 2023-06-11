@@ -1,20 +1,20 @@
 <section class="list">
-  <form [formGroup]="isrcForm">
-    <label for="isrc">Add new track</label>
+  <form class="form" [formGroup]="isrcForm" [ngClass]="{'formFull':trackList.length === 0}">
+    <h1 for="isrc">Add new track</h1>
     <div class="div-input">
       <input type="text" class="input" formControlName="isrc">
       <button class="inputBtn" (click)="searchInDb()">Add</button>
     </div>
     <dialog open *ngIf="showModal">
       <p>{{message}}</p>
-      <form method="dialog">
+      <form method="dialog" class="formDialog">
         <button (click)="hideModal()">OK</button>
       </form>
     </dialog>
   </form>
-  <div class="container">
+  <div *ngIf="trackList.length > 0" class="container">
     <div class="resultInfo">
-      <h1>Search result</h1>
+      <h2>Search result</h2>
       <span>{{trackList.length}} Tracks</span>
     </div>
     <div class="carbBox">

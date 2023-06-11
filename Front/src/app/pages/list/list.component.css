@@ -1,43 +1,53 @@
-.list {
-  background: #B5CAD1;
-  padding: 2rem;
-}
-
-form {
-  background: var(--white);
+.form {
+  /* background-color: #122A39; */
+  background-color: #212121;
+  padding: 3rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-label {
-  font-size: 1.5rem;
+.formFull {
+  height: 57vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: white;
 }
 
 .div-input {
   position: relative;
   margin: 1em;
-  width: 30%;
+  width: 500px;
+  padding: 0 2rem;
 }
 
 .input {
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
   margin: 0px;
-  padding: 0px;
+  padding-left: 1rem;
   width: 100%;
   outline: none;
-  height: 30px;
+  height: 50px;
   border-radius: 5px;
-  border: 2px solid #313030;
+  border: 2px solid white;
 }
 
 .inputBtn {
   position: absolute;
-  border-radius: 5px;
-  right: 0px;
-  border: 1px solid;
+  font-size: 16px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  right: 36px;
   top: 2px;
-  height: 30px;
+  width: 50px;
+  height: 46px;
   cursor: pointer;
   color: white;
   background-color: #F06221;
@@ -45,31 +55,56 @@ label {
 }
 
 dialog {
-  margin-top: 12rem;
-  /* opacity: 0; */
-  /* transition: opacity 1s; */
-  /* pointer-events: none; */
+  text-align: center;
+  color: #333;
+  border: none;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.5);
+  width: 500px;
+  max-width: 80%;
 }
-/* 
-dialog[open] {
-  opacity: 1;
-  transition: opacity 1s;
-  pointer-events: inherit;
-} */
 
-dialog p{
+dialog[open] {
+  animation: toggle-modal .3s ease-in-out;
+}
+
+@keyframes toggle-modal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+dialog p {
   padding: 1rem;
+  font-size: 2rem;
+}
+
+.formDialog button {
+  background-color: #F06221;
+  border-radius: 5px;
+  border: 2px solid #F06221;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0.5rem;
+  margin-top: 1.5rem;
+  width: 120px;
 }
 
 .resultInfo {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  padding-top: 2rem;
 }
 
-h1 {
+h2 {
   padding: 2rem 0;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .resultInfo span {
@@ -82,9 +117,11 @@ h1 {
   gap: 1.5rem;
   justify-content: center;
   width: 100%;
+  margin-bottom: 4rem;
 }
 
 .card {
+  position: relative;
   background: #F1F3F4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
@@ -96,6 +133,11 @@ h1 {
     "imgThumb spotifyLink spotifyLink spotifyLink spotifyLink"
     "title title title release release"
     "artistName artistName artistName artistName country";
+  transition: .5s;
+}
+
+.card:hover {
+  background-color: #e7e9e9;
 }
 
 .imgThumb {
@@ -137,7 +179,9 @@ img {
 .spotifyLinkBtn {
   border-radius: 5px;
   border: 2px solid #313030;
-  cursor: pointer
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0.5rem;
 }
 
 .title {
@@ -164,12 +208,15 @@ img {
 }
 
 .country {
-  width: 30px;
-  height: 21px;
-  margin: 0.5rem 1rem 0 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 35px;
+  height: 35px;
   background-color: #575757;
   box-shadow: 0px 4px 4px 0px #00000040;
   border-radius: 4px;
+  border-top-left-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,6 +225,7 @@ img {
 }
 
 .pCountry {
+  font-size: 13px;
   font-weight: 700;
   color: white;
 }
@@ -186,16 +234,13 @@ img {
   h1 {
     font-size: 2rem;
   }
+
   .resultInfo span {
     font-size: 1.5rem;
   }
 }
 
 @media (max-width: 600px) {
-  .div-input {
-    width: 90%;
-  }
-
   .card {
     width: 100%;
     grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
@@ -203,6 +248,16 @@ img {
 }
 
 @media (max-width: 500px) {
+  .div-input {
+    width: 380px;
+  }
+
+  .resultInfo {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
   .card {
     grid-template-rows: 2fr 1fr 0.5fr 0.5fr 0.5fr 0.5fr;
     grid-template-columns: 1fr 1fr;
@@ -214,12 +269,18 @@ img {
       "artistName artistName"
       "release country"
   }
+
   .imgThumb {
     width: 150px;
     height: 150px;
     margin: 1rem 0 0 0;
     display: flex;
     justify-self: center;
+  }
+
+  .spotifyLink {
+    justify-content: space-between;
+    margin: 0 1rem;
   }
 
   .release {
