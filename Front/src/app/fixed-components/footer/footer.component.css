@@ -8,14 +8,23 @@
 }
 
 .text {
-  padding: 1rem;
+  padding: 0.5rem;
   color: white;
   font-size: 1.5rem;
+}
+
+.text2 {
+  font-size: 1.25rem;
+}
+
+.anchors {
+  display: flex;
+  justify-content: center;
 }
 
 .anchor img {
   width: 2rem;
   height: 2rem;
-  padding: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   display: inline;
 }

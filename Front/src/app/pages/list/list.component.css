@@ -3,16 +3,19 @@
   padding: 2rem;
 }
 
-.form{
+form {
   background: var(--white);
-  /* height: 35em; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.div-input{
+label {
+  font-size: 1.5rem;
+}
+
+.div-input {
   position: relative;
   margin: 1em;
   width: 30%;
@@ -32,13 +35,30 @@
   position: absolute;
   border-radius: 5px;
   right: 0px;
-  border: none;
+  border: 1px solid;
   top: 2px;
   height: 30px;
   cursor: pointer;
   color: white;
   background-color: #F06221;
   transform: translateX(2px);
+}
+
+dialog {
+  margin-top: 12rem;
+  /* opacity: 0; */
+  /* transition: opacity 1s; */
+  /* pointer-events: none; */
+}
+/* 
+dialog[open] {
+  opacity: 1;
+  transition: opacity 1s;
+  pointer-events: inherit;
+} */
+
+dialog p{
+  padding: 1rem;
 }
 
 .resultInfo {
@@ -57,7 +77,7 @@ h1 {
 }
 
 .carbBox {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
@@ -65,18 +85,17 @@ h1 {
 }
 
 .card {
-  display: flex;
   background: #F1F3F4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   display: grid;
   grid-template-rows: 70px 40px 50px 40px;
-  grid-template-columns: 116px 98px 118px 90px;
+  grid-template-columns: 116px 98px 60px 60px 90px;
   grid-template-areas:
-    "imgThumb controls controls controls"
-    "imgThumb spotifyLink spotifyLink spotifyLink"
-    "title title title release"
-    "artistName artistName artistName country";
+    "imgThumb controls controls controls controls"
+    "imgThumb spotifyLink spotifyLink spotifyLink spotifyLink"
+    "title title title release release"
+    "artistName artistName artistName artistName country";
 }
 
 .imgThumb {
@@ -173,15 +192,19 @@ img {
 }
 
 @media (max-width: 600px) {
+  .div-input {
+    width: 90%;
+  }
+
   .card {
     width: 100%;
-    grid-template-columns: 1fr 2fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
   }
 }
 
 @media (max-width: 500px) {
   .card {
-    grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr 0.5fr 0.5fr 0.5fr 0.5fr;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "imgThumb imgThumb"
@@ -194,5 +217,19 @@ img {
   .imgThumb {
     width: 150px;
     height: 150px;
+    margin: 1rem 0 0 0;
+    display: flex;
+    justify-self: center;
+  }
+
+  .release {
+    margin: 0 0 1rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .country {
+    margin: 0 1rem 0 0;
   }
 }
