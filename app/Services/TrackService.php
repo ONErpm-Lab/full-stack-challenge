@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Adapters\DeezerAPIAdapter;
 use App\Entities\Track;
 use App\Repositories\MissingIsrcRepository;
 use App\Repositories\TrackRepository;
@@ -26,6 +27,12 @@ class TrackService
         return $this->apiService->getByISRC($isrc);
     }
 
+    public function getFromDeezer(string $isrc)
+    {
+        $service = app()->make(DeezerAPIService::class);
+        return (new DeezerAPIAdapter($service))->getByISRC($isrc);
+    }
+
     public function store(array $data)
     {
         $track = Track::fromArray($data);
@@ -41,6 +48,9 @@ class TrackService
             $data = $this->getFromSpotify($isrc);
             if (!empty($data)) {
                 $this->store($data);
+            } elseif(env('ENABLE_DEEZER_API')) {
+                $data = $this->getFromDeezer($isrc);
+                if (!empty($data)) $this->store($data);
             }
         }
     }

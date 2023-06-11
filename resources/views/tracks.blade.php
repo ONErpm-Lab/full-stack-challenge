@@ -77,7 +77,7 @@
                                             </td>
                                             <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">
                                                 <img src="{{ $track->cover }}" alt="Album Cover" title="{{ $track->album_title }}"
-                                                class="object-cover rounded w-48">
+                                                class="object-cover rounded w-128">
                                             </td>
                                             <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">
                                                 {{ date('d/m/Y', strtotime($track->release_date)) }}
@@ -107,7 +107,9 @@
                                                 @endphp
                                             </td>
                                             <td class="border-b border-slate-100 p-4 pl-8 text-slate-500">
-                                                <button class="rounded play cursor-pointer" id="play_{{ $track->id }}" data-url="{{ $track->preview_url }}" data-id="{{ $track->id }}">
+                                                <button class="rounded play cursor-pointer" 
+                                                    id="play_{{ $track->id }}" data-url="{{ $track->preview_url }}" data-id="{{ $track->id }}">
+                                                  @if (!empty($track->preview_url))
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="w-6 h-6">
@@ -116,6 +118,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
                                                     </svg>
+                                                  @endif
                                                 </button>
                                                 <button class="rounded hidden pause cursor-pointer" id="pause_{{ $track->id }}" data-id="{{ $track->id }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
