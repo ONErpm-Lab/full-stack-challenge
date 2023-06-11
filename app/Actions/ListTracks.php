@@ -15,7 +15,7 @@ class ListTracks extends Action
             $tracks = $service->list()->toArray();
             return $this->asHtml('tracks', ['tracks' => $tracks]);
         } catch (Throwable $th) {
-            throw new Exception($th->getMessage(), $th->getCode());
+            throw new Exception($th->getMessage(), 500);
         }
     }
 }
