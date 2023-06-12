@@ -1,25 +1,41 @@
-este projeto usa angular 16 
-para compilar o projeto use:
-npm install
-para executar: 
-npm start
+# Fullstack Challange OneRpm
 
-este projeto usa 
- "@prisma/client": "^4.15.0",
-    "axios": "^1.4.0",
-    "express": "^4.18.2"
+Este projeto usa:   Angular16 | Rxjs | Node | Prisma | Axios | Express |Jest
 
-configurar a url do banco no arquivo .env
-para executar a criaçao do banco em mysql:
-npx prisma migrate dev
-para criar o client:
-npx prisma generate 
-para executar:
-npm start
+### Para o frontend, use:
 
-este projeto vai expor uma api rest para gerenciar as tracks:
-get /tracks para listar
-post /tracks para criar
+> npm install
+
+Para executar:
+
+> npm start
+
+### Para o banco e backend, use:
+
+Configure a url do banco no arquivo .env
+
+Para executar a criaçao do banco em Mysql:
+
+> npx prisma migrate dev
+
+Para criar o client:
+
+> npx prisma generate
+
+Para executar o backend :
+
+> npm start
+
+Esta aplicação vai expor uma Api rest para gerenciar as tracks:
+
+*  **get /tracks** -  para listar as faixas existentes no banco
+
+*  **post /tracks**  - para buscar a faixa na Api Spotify e salvá-la no banco
+
+![Large Sreen](/Front/src/assets/img/large.jpg "Large Screen")
+![Medium Sreen](/Front/src/assets/img/med.jpg "Medium Screen")
+![Small Sreen](/Front/src/assets/img/small.jpg "Small Screen")
+
 
 ## Início
 

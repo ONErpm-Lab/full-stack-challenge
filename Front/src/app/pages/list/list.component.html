@@ -32,7 +32,7 @@
         <div class="title"><p>{{track.name}}</p></div>
         <div class="artistName"><p>{{track.artists}}</p></div>
         <div class="release"><p>Release: {{track.release_date | date:"shortDate"}}</p></div>
-        <div class="country">
+        <div *ngIf="track.available_in_brazil" class="country">
           <p class="pCountry">BR</p>
         </div>
       </div>
