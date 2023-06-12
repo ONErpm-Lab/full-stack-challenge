@@ -3,9 +3,7 @@ const TrackRepository = require("../repositories/trackRepository");
 
 const trackFromSpotifyTrack = (spotifyTrack) => {
 
-  //album
   const album = spotifyTrack.album;
-  // artists
   const allArtists = spotifyTrack.artists.map((artist)=>artist.name).join();
 
   const convertedTrack = {
@@ -20,20 +18,16 @@ const trackFromSpotifyTrack = (spotifyTrack) => {
     available_in_brazil: !!spotifyTrack.available_markets.find((market)=>market==="BR")
   };
 
-  console.log("Converted track :: ", convertedTrack)
-
   return convertedTrack;
 }
 
 const findByISRC = async (isrc) => {
 
     const existingTrack = await TrackRepository.findByISRC(isrc);
-    console.log(existingTrack)
 
     if (existingTrack) throw new Error("This track is already exists")
 
     const spotifyResult = await SpotifyClient.getSpotifyTrack(isrc);
-    console.log("Found spotify track :: " , spotifyResult)
 
     if (spotifyResult.tracks.total === 0) throw new Error("ISRC not found.")
 

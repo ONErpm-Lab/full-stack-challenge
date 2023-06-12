@@ -12,7 +12,6 @@ const getSpotifyToken = async () => {
       client_secret: "f182c0c42a3b40a5bc0ea07f52fd26f9"
     }),
   }).then((result) => {
-    console.log(result)
     return result.data.access_token
   })
 }
