@@ -1,73 +1,81 @@
-## Início
+# TracksONErpm Backend and Frontend
 
-Bem vindo ao mundo da música!
+This is a web application that allows you to manage and display track information from Spotify's API. It consists of a backend built with Laravel and a frontend built with Angular.
 
-Atualmente temos a necessidade de consumir os dados de faixas musicais através do código ISRC, que é uma das coisas mais importantes na indústria fonográfica.
+## Table of Contents
 
-Segundo [Abramus](https://www.abramus.org.br/musica/isrc/), ISRC (International Standard Recording Code ou Código de Gravação Padrão Internacional) é um padrão internacional de código para identificar de forma única as gravações (faixas).
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Using Docker](#using-docker)
+- [Usage](#usage)
+- [Endpoints](#endpoints)
+- [Testing](#testing)
+- [About Me](#about-me)
+- [Skills](#skills)
 
-Ele funciona como um código de barras da faixa.
+## Getting Started
+
+### Prerequisites
+
+- Docker
+
+### Installation
+
+1. Clone the repository and define variables:
+
+```bash
+    git clone https://github.com/carlosleonardoms/full-stack-challenge.git
+    cd full-stack-challenge/tracks-backend
+    cp .env.dev .env
+```
+# Start Infrastructure
+
+1. Build the Docker images:
+
+```bash
+    docker compose --project-name=onerpm-tracks build
+```
+
+2. Start the containers:
+
+```bash
+    docker compose --project-name=onerpm-tracks up -d
+```
+3. Set dependencies:
+
+```bash
+    docker exec -it onerpm-tracks-backend-1 bash
+    composer install
+    php artisan migrate
+```
+
+## Usage
+Visit http://localhost to access the frontend.
+
+Use the frontend to add, view, and get track information from Spotify.
+
+API routes are available at http://localhost:8005/api.
+
+## Endpoints
+The RESTFull endpoints available under /api/tracks are GET,POST, and DELETE.
+
+The Spotify Integration lives under GET:/api/spotify-tracks. 
+
+## Testing
+Backend tests (Laravel): Run the following command inside the backend directory:
+
+```bash
+    docker exec -it onerpm-tracks-backend-1 bash
+    php artisan test
+```
+
+## 🚀 About Me
+
+I am a highly motivated, self-taught developer seeking to grow in my career building web applications and services. Familiar with the development and deployment process for many web-based technologies.
 
 
-## Problema
+## 🛠 Skills
+PHP, Laravel, Javascript, Angular, MySQL, AWS, Docker, HTML, CSS
 
-Durante o fechamento de contrato com um produtor, foram informados 10 ISRC's que não constam em nossas bases de dados, que seguem abaixo:
-
-* US7VG1846811
-* US7QQ1846811
-* BRC310600002
-* BR1SP1200071
-* BR1SP1200070
-* BR1SP1500002
-* BXKZM1900338
-* BXKZM1900345
-* QZNJX2081700
-* QZNJX2078148
-
-Precisamos obter e exibir os seguintes dados:
-
-* Thumb do álbum
-* Data de lançamento
-* Título da faixa
-* Lista dos artistas da faixa
-* Duração da faixa em minutos e segundos (mm:ss)
-* Player com prévia do áudio
-* Link para a página da faixa no Spotify
-* Sinalização dizendo se a faixa está ou não disponível no Brasil (BR)
-
-Por decisão técnica, temos a necessidade de guardar estas informações em um banco de dados. Para isso, fique livre para criar a estrutura necessária para guardar as informações que achar pertinente das faixas.
-
-Uma vez armazenados os dados, precisamos exibí-los através de uma webpage pública, ordenados por título da faixa de forma alfabética.
-
-
-## Requisitos
-
-* Faça um fork deste repositório e abra um PR quando estiver finalizado.
-* O backend deve ser feito no framework Laravel 7.0 ou superior.
-* O banco de dados deve ser MySQL.
-* A página deve ser responsiva para atender todos os tipos de dispositivos.
-* Use a API do Spotify: [https://developer.spotify.com/](https://developer.spotify.com/) para coletar os dados das faixas.
-
-
-## Diferencial
-
-* Desenvolver o frontend no Angular 8 ou superior.
-* Desenvolver testes unitários e de integração.
-
-
-## O que será avaliado
-
-* Fidelidade às instruções.
-* Padrões de projeto.
-* Clean Code e boas práticas.
-* Boas práticas de versionamento.
-
-
-## Perfil que buscamos
-
-* Comunicativo
-* Autodidata
-* Automotivado
-* Curioso
-* Gostar de trabalhar em equipe
-* Compromissado
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlosleonardoms/)
