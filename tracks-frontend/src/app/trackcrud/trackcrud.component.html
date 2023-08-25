@@ -1,0 +1,119 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<header><h1 class="title"> SPOTIFY TRACKS </h1></header>
+<div class="container mt-4">
+
+    <div class="searchTrack-wrapper">
+        <input type="text" [(ngModel)]="isrcCode" (keydown.enter)="getTrackInfo()" placeholder="ISRC code">
+        <button (click)="getTrackInfo()">Get Track Info</button>
+    </div>
+
+    <div class="card">
+        <div class="col-md-12">
+            <h1>Add Track</h1>
+        </div>
+
+    <form class="m-4">
+        <div class="form-group">
+            <label for="albumThumb">Album Thumb</label>
+            <input type="text" class="form-control" id="albumThumb" placeholder="ex: https://i.scdn.co/image/..." [(ngModel)]="album_thumb"
+                [ngModelOptions]="{standalone: true}" name="albumThumb">
+        </div>
+    
+        <div class="form-group">
+            <label for="releaseDate">Release Date</label>
+            <input type="text" class="form-control" id="releaseDate" placeholder="ex: 2021-08-20"
+                [(ngModel)]="release_date" [ngModelOptions]="{standalone: true}" name="releaseDate">
+        </div>
+    
+        <div>
+            <label for="trackTitle">Track Title</label>
+            <input type="text" class="form-control" id="trackTitle" placeholder="ex: Heroes" [(ngModel)]="track_title"
+                [ngModelOptions]="{standalone: true}" name="trackTitle">
+        </div>
+    
+        <div>
+            <label for="artists">Artist(s)</label>
+            <input type="text" class="form-control" id="artists" placeholder="ex: DJ Maskot, MC Madan"
+                [(ngModel)]="artists" [ngModelOptions]="{standalone: true}" name="artists">
+        </div>
+    
+        <div>
+            <label for="duration">Duration (mm:ss)</label>
+            <input type="text" class="form-control" id="duration"
+                placeholder="ex: 03:27" [(ngModel)]="duration"
+                [ngModelOptions]="{standalone: true}" name="duration">
+        </div>
+    
+        <div>
+            <label for="audioPreviewUrl">Audio Preview Url</label>
+            <input type="text" class="form-control" id="audioPreviewUrl" placeholder="https://p.scdn.co/mp3-preview/..."
+                [(ngModel)]="audio_preview_url" [ngModelOptions]="{standalone: true}" name="audioPreviewUrl">
+        </div>
+    
+        <div>
+            <label for="spotifyTrackUrl">Spotify Track Url</label>
+            <input type="text" class="form-control" id="spotifyTrackUrl"
+                placeholder="ex: https://open.spotify.com/track/..." [(ngModel)]="spotify_track_url"
+                [ngModelOptions]="{standalone: true}" name="spotifyTrackUrl">
+        </div>
+    
+        <div>
+            <label for="isAvailableInBr">Is Track Available In Brazil (BR)</label>
+            <input type="text" class="form-control" id="isAvailableInBr"
+                placeholder="ex: False"
+                [(ngModel)]="is_available_in_br" [ngModelOptions]="{standalone: true}" name="isAvailableInBr">
+        </div>
+    
+        <button type="submit" class="btn btn-primary mt-4" (click)="save()">Add</button>
+    </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Album Thumb</th>
+                <th>Release Date</th>
+                <th>Track Title</th>
+                <th>Artist(s)</th>
+                <th>Duration</th>
+                <th>Audio Preview</th>
+                <th>Spotify Track Url</th>
+                <th>Is Available In Brazil (BR)</th>
+                <th>X</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let trackItem of TrackArray">
+                <td><img src="{{trackItem.album_thumb}}" alt="album image"></td>
+                <td>{{trackItem.release_date}}</td>
+                <td>{{trackItem.track_title}}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let artist of trackItem.artists">{{artist}}</li>
+                    </ul>
+                </td>
+                <td>{{trackItem.duration}}</td>
+                <td>
+                    <div class="audio-player-container">
+                        <audio controls>
+                            <source src="{{trackItem.audio_preview_url}}" type="audio/mpeg">
+                        </audio>
+                    </div>
+                    
+                </td>
+                <td><a href="{{trackItem.spotify_track_url}}" target="_blank">Link</a></td>
+                <td *ngIf="trackItem.is_available_in_br">Yes</td>
+                <td *ngIf="!trackItem.is_available_in_br">No</td>
+                <td><button class="btn btn-danger" (click)="deleteTrack(trackItem.id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
