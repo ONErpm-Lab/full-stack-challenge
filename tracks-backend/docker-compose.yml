@@ -1,0 +1,66 @@
+version: "3.7"
+services:
+  frontend:
+    build:      
+      context: ../tracks-frontend/
+      dockerfile: Dockerfile
+    networks:
+      - ntw-1rpm
+    ports:
+      - 80:4200
+  backend:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /var/www/
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www
+    networks:
+      - ntw-1rpm
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./docker-compose/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - 3307:3306
+    networks:
+      - ntw-1rpm
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 8005:80
+    depends_on:
+      - db
+      - backend
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - ntw-1rpm
+
+networks:
+  ntw-1rpm:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
+
