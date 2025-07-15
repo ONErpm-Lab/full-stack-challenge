@@ -19,7 +19,7 @@ class ImportSpotifyTracks extends Command
      *
      * @var string
      */
-    protected $signature = 'app:import-spotify-tracks';
+    protected $signature = 'app:import-spotify-tracks {isrc?}';
 
     /**
      * The console command description.
@@ -55,7 +55,10 @@ class ImportSpotifyTracks extends Command
 
             DB::beginTransaction();
 
-            foreach ($this->isrcs as $isrc) {
+            $isrcArg = $this->argument('isrc');
+            $isrcs = $isrcArg ? [$isrcArg] : $this->isrcs;
+
+            foreach ($isrcs as $isrc) {
     
                 $trackData = $this->spotify->searchTrackByISRC($isrc);
     
