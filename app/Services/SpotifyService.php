@@ -27,12 +27,13 @@ class SpotifyService
         $token = $this->getAccessToken();
 
         $response = Http::withToken($token)->throw()->get('https://api.spotify.com/v1/search', [
-            'q' => 'isrc:' . $isrc,
-            'type' => 'track',
+            'q'     => 'isrc:' . $isrc,
+            'type'  => 'track',
+            'limit' => 1
         ]);
 
         if ($response->failed()) {
-            return json_encode([]);
+            throw new Exception("The request to Spotify API failed.");
         }
 
         return $response->json();
