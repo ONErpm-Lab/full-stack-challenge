@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Track;
 use App\Services\SpotifyService;
@@ -71,6 +72,15 @@ class ImportSpotifyTracks extends Command
                     'spotify_url'           => $firstTrack['external_urls']['spotify'],
                     'duration_ms'           => $firstTrack['duration_ms'],
                     'avaliable_in_brazil'   => in_array('BR', $firstTrack['available_markets'] ?? false),
+                ]
+            );
+
+            Album::updateOrCreate(
+                ['spotify_id' => $firstTrack['album']['id']],
+                [
+                    'name'          => $firstTrack['album']['name'],
+                    'thumb_url'     => $firstTrack['album']['images'][0]['url'] ?? null,
+                    'release_date'  => $firstTrack['album']['release_date'],
                 ]
             );
 
