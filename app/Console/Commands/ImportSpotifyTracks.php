@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\AlbumTrack;
 use App\Models\Artist;
 use App\Models\Track;
+use App\Models\TrackArtist;
 use App\Services\SpotifyService;
 use Illuminate\Console\Command;
 
@@ -91,12 +92,18 @@ class ImportSpotifyTracks extends Command
             );
 
             foreach ($firstTrack['artists'] as $trackArtist) {
-                Artist::updateOrCreate(
+                
+                $artist = Artist::updateOrCreate(
                     ['spotify_id' => $trackArtist['id']],
                     [
                         'spotify_url' => $trackArtist['external_urls']['spotify'],
                         'name'        => $trackArtist['name'],
                     ]
+                );
+
+                TrackArtist::updateOrCreate(
+                    ['track_id' => $track->id, 'artist_id' => $artist->id],
+                    []
                 );
             }
 
