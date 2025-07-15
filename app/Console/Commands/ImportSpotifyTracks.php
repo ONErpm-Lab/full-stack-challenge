@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Album;
+use App\Models\AlbumTrack;
 use App\Models\Artist;
 use App\Models\Track;
 use App\Services\SpotifyService;
@@ -75,13 +76,18 @@ class ImportSpotifyTracks extends Command
                 ]
             );
 
-            Album::updateOrCreate(
+            $album = Album::updateOrCreate(
                 ['spotify_id' => $firstTrack['album']['id']],
                 [
                     'name'          => $firstTrack['album']['name'],
                     'thumb_url'     => $firstTrack['album']['images'][0]['url'] ?? null,
                     'release_date'  => $firstTrack['album']['release_date'],
                 ]
+            );
+
+            AlbumTrack::updateOrCreate(
+                ['album_id' => $album->id, 'track_id' => $track->id],
+                []
             );
 
             foreach ($firstTrack['artists'] as $trackArtist) {
