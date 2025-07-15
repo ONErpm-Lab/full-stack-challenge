@@ -14,7 +14,7 @@ class SpotifyService
             $response = Http::asForm()->withBasicAuth(
                 config('services.spotify.client_id'),
                 config('services.spotify.client_secret')
-            )->post(config('services.spotify.token_url'), [
+            )->throw()->post(config('services.spotify.token_url'), [
                 'grant_type' => 'client_credentials',
             ]);
 
@@ -31,10 +31,6 @@ class SpotifyService
             'type'  => 'track',
             // 'limit' => 1
         ]);
-
-        if ($response->failed()) {
-            throw new Exception("The request to Spotify API failed.");
-        }
 
         return $response->json();
     }
