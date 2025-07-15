@@ -1,73 +1,50 @@
-## Início
+# PHP - Spotify API Consumer
 
-Bem vindo ao mundo da música!
+## Requirements
 
-Atualmente temos a necessidade de consumir os dados de faixas musicais através do código ISRC, que é uma das coisas mais importantes na indústria fonográfica.
+- **Composer** ≥ 2.8.3  
+- **PHP** ≥ 8.2
 
-Segundo [Abramus](https://www.abramus.org.br/musica/isrc/), ISRC (International Standard Recording Code ou Código de Gravação Padrão Internacional) é um padrão internacional de código para identificar de forma única as gravações (faixas).
+## 🚀 Installation and Execution
 
-Ele funciona como um código de barras da faixa.
+1 - Access the Spotify Developers dashboard, log in, and create your own app:
+    https://developer.spotify.com/dashboard
 
+2 - Copy the example environment file and create your own `.env` file. Update the Spotify constants with your own credentials:
+```
+cp .env.example .env
+```
 
-## Problema
+Install backend dependencies:
+```
+composer install
+```
 
-Durante o fechamento de contrato com um produtor, foram informados 10 ISRC's que não constam em nossas bases de dados, que seguem abaixo:
+Generate the application key:
+```
+php artisan key:generate
+```
 
-* US7VG1846811
-* US7QQ1846811
-* BRC310600002
-* BR1SP1200071
-* BR1SP1200070
-* BR1SP1500002
-* BXKZM1900338
-* BXKZM1900345
-* QZNJX2081700
-* QZNJX2078148
+Run database migrations:
+```
+php artisan migrate
+```
 
-Precisamos obter e exibir os seguintes dados:
+Start the development server:
+```
+php artisan serve
+```
 
-* Thumb do álbum
-* Data de lançamento
-* Título da faixa
-* Lista dos artistas da faixa
-* Duração da faixa em minutos e segundos (mm:ss)
-* Player com prévia do áudio
-* Link para a página da faixa no Spotify
-* Sinalização dizendo se a faixa está ou não disponível no Brasil (BR)
+## Run the spotify track migration command
 
-Por decisão técnica, temos a necessidade de guardar estas informações em um banco de dados. Para isso, fique livre para criar a estrutura necessária para guardar as informações que achar pertinente das faixas.
+You can run the command either with or without an ISRC parameter:
 
-Uma vez armazenados os dados, precisamos exibí-los através de uma webpage pública, ordenados por título da faixa de forma alfabética.
+1 - Run with an ISRC parameter:
+```
+php artisan app:import-spotify-tracks USUR10301225
+```
 
-
-## Requisitos
-
-* Faça um fork deste repositório e abra um PR quando estiver finalizado.
-* O backend deve ser feito no framework Laravel 7.0 ou superior.
-* O banco de dados deve ser MySQL.
-* A página deve ser responsiva para atender todos os tipos de dispositivos.
-* Use a API do Spotify: [https://developer.spotify.com/](https://developer.spotify.com/) para coletar os dados das faixas.
-
-
-## Diferencial
-
-* Desenvolver o frontend no Angular 8 ou superior.
-* Desenvolver testes unitários e de integração.
-
-
-## O que será avaliado
-
-* Fidelidade às instruções.
-* Padrões de projeto.
-* Clean Code e boas práticas.
-* Boas práticas de versionamento.
-
-
-## Perfil que buscamos
-
-* Comunicativo
-* Autodidata
-* Automotivado
-* Curioso
-* Gostar de trabalhar em equipe
-* Compromissado
+2 - Run without any parameter (imports the default dataset):
+```
+php artisan app:import-spotify-tracks
+```
