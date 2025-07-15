@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Artist;
 use App\Models\Track;
 use App\Services\SpotifyService;
 use Illuminate\Console\Command;
@@ -50,12 +51,12 @@ class ImportSpotifyTracks extends Command
             $trackData = $this->spotify->searchTrackByISRC($isrc);
 
             if (!$trackData) {
-                $this->warn("⚠️  Sound track has not found. ISRC: $isrc");
+                $this->warn("⚠️  The soundtrack was not found. ISRC: $isrc");
                 continue;
             }
 
             if (!isset($trackData['tracks']['items'][0]) || empty($trackData['tracks']['items'])) {
-                $this->warn("⚠️  Sound track has not found. ISRC: $isrc");
+                $this->warn("⚠️  The soundtrack was not found. ISRC: $isrc");
                 continue;
             }
 
@@ -73,7 +74,17 @@ class ImportSpotifyTracks extends Command
                 ]
             );
 
-            $this->info("✅ Sound track has found. ISRC: {$track->title}");
+            foreach ($firstTrack['artists'] as $trackArtist) {
+                Artist::updateOrCreate(
+                    ['spotify_id' => $trackArtist['id']],
+                    [
+                        'spotify_url' => $trackArtist['external_urls']['spotify'],
+                        'name'        => $trackArtist['name'],
+                    ]
+                );
+            }
+
+            $this->info("✅ Soundtrack has been found. Title: {$track->title}");
         }
 
         $this->info('_____________________________________________');
