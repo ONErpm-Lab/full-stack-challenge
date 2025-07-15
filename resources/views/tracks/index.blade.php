@@ -21,7 +21,7 @@
                         <p class="card-text">
                             <strong>Artists: </strong>{{ $track['artists'] }}<br>
                             <strong>Duration: </strong>{{ $track['duration'] }}<br>
-                            <strong>Release: </strong>{{ $track['realease_date'] }}<br>
+                            <strong>Release: </strong>{{ $track['release_date'] }}<br>
                             <strong>Available in BR: </strong>
                             <span class="badge {{ $track['avaliable_in_brazil'] ? 'bg-success' : 'bg-danger' }}">
                                 {{ $track['avaliable_in_brazil'] ? 'Yes' : 'No' }}
