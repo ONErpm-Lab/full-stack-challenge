@@ -9,6 +9,8 @@ use App\Models\Track;
 use App\Models\TrackArtist;
 use App\Services\SpotifyService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class ImportSpotifyTracks extends Command
 {
@@ -49,68 +51,73 @@ class ImportSpotifyTracks extends Command
      */
     public function handle()
     {
-        foreach ($this->isrcs as $isrc) {
+        try {
 
-            $trackData = $this->spotify->searchTrackByISRC($isrc);
+            DB::beginTransaction();
 
-            if (!$trackData) {
-                $this->warn("⚠️  The soundtrack was not found. ISRC: $isrc");
-                continue;
+            foreach ($this->isrcs as $isrc) {
+    
+                $trackData = $this->spotify->searchTrackByISRC($isrc);
+    
+                if (!$trackData) {
+                    $this->warn("⚠️  The soundtrack was not found. ISRC: $isrc");
+                    continue;
+                }
+    
+                foreach ($trackData['tracks']['items'] as $trackDataItem) {
+    
+                    $track = Track::updateOrCreate(
+                        ['isrc' => $isrc],
+                        [
+                            'spotify_id'            => $trackDataItem['id'],
+                            'title'                 => $trackDataItem['name'],
+                            'preview_url'           => $trackDataItem['preview_url'],
+                            'spotify_url'           => $trackDataItem['external_urls']['spotify'],
+                            'duration_ms'           => $trackDataItem['duration_ms'],
+                            'avaliable_in_brazil'   => in_array('BR', $trackDataItem['available_markets'] ?? false),
+                        ]
+                    );
+        
+                    $album = Album::updateOrCreate(
+                        ['spotify_id' => $trackDataItem['album']['id']],
+                        [
+                            'name'          => $trackDataItem['album']['name'],
+                            'thumb_url'     => $trackDataItem['album']['images'][0]['url'] ?? null,
+                            'release_date'  => $trackDataItem['album']['release_date'],
+                        ]
+                    );
+        
+                    AlbumTrack::updateOrCreate(
+                        ['album_id' => $album->id, 'track_id' => $track->id],
+                        []
+                    );
+        
+                    foreach ($trackDataItem['artists'] as $trackArtist) {
+        
+                        $artist = Artist::updateOrCreate(
+                            ['spotify_id' => $trackArtist['id']],
+                            [
+                                'spotify_url' => $trackArtist['external_urls']['spotify'],
+                                'name'        => $trackArtist['name'],
+                            ]
+                        );
+        
+                        TrackArtist::updateOrCreate(
+                            ['track_id' => $track->id, 'artist_id' => $artist->id],
+                            []
+                        );
+                    }
+                }
             }
 
-            if (!isset($trackData['tracks']['items'][0]) || empty($trackData['tracks']['items'])) {
-                $this->warn("⚠️  The soundtrack was not found. ISRC: $isrc");
-                continue;
-            }
+            DB::commit();
 
-            $firstTrack = $trackData['tracks']['items'][0];
+            $this->info('_____________________________________________');
+            $this->info('Script finished.');
 
-            $track = Track::updateOrCreate(
-                ['isrc' => $isrc],
-                [
-                    'spotify_id'            => $firstTrack['id'],
-                    'title'                 => $firstTrack['name'],
-                    'preview_url'           => $firstTrack['preview_url'],
-                    'spotify_url'           => $firstTrack['external_urls']['spotify'],
-                    'duration_ms'           => $firstTrack['duration_ms'],
-                    'avaliable_in_brazil'   => in_array('BR', $firstTrack['available_markets'] ?? false),
-                ]
-            );
-
-            $album = Album::updateOrCreate(
-                ['spotify_id' => $firstTrack['album']['id']],
-                [
-                    'name'          => $firstTrack['album']['name'],
-                    'thumb_url'     => $firstTrack['album']['images'][0]['url'] ?? null,
-                    'release_date'  => $firstTrack['album']['release_date'],
-                ]
-            );
-
-            AlbumTrack::updateOrCreate(
-                ['album_id' => $album->id, 'track_id' => $track->id],
-                []
-            );
-
-            foreach ($firstTrack['artists'] as $trackArtist) {
-                
-                $artist = Artist::updateOrCreate(
-                    ['spotify_id' => $trackArtist['id']],
-                    [
-                        'spotify_url' => $trackArtist['external_urls']['spotify'],
-                        'name'        => $trackArtist['name'],
-                    ]
-                );
-
-                TrackArtist::updateOrCreate(
-                    ['track_id' => $track->id, 'artist_id' => $artist->id],
-                    []
-                );
-            }
-
-            $this->info("✅ Soundtrack has been found. Title: {$track->title}");
+        } catch (Throwable $th) {
+            DB::rollBack();
+            $this->warn("⚠️  An error occurred: " . $th->getMessage());
         }
-
-        $this->info('_____________________________________________');
-        $this->info('Script finished.');
     }
 }

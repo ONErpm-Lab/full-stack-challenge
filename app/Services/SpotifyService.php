@@ -29,7 +29,7 @@ class SpotifyService
         $response = Http::withToken($token)->throw()->get('https://api.spotify.com/v1/search', [
             'q'     => 'isrc:' . $isrc,
             'type'  => 'track',
-            'limit' => 1
+            // 'limit' => 1
         ]);
 
         if ($response->failed()) {
