@@ -15,4 +15,14 @@ class Track extends Model
         'spotify_url',
         'avaliable_in_brazil'
     ];
+
+    public function albums()
+    {
+        return $this->belongsToMany(Album::class, 'album_tracks');
+    }
+
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class, 'track_artists');
+    }
 }

@@ -12,4 +12,9 @@ class Album extends Model
         'thumb_url',
         'release_date',
     ];
+
+    public function tracks()
+    {
+        return $this->belongsToMany(Track::class, 'album_tracks');
+    }
 }

@@ -11,4 +11,9 @@ class Artist extends Model
         'spotify_url',
         'name',
     ];
+
+    public function tracks()
+    {
+        return $this->belongsToMany(Track::class, 'track_artists');
+    }
 }
