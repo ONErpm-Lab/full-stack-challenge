@@ -1,0 +1,144 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Music API",
+        "version": "v1"
+    },
+    "paths": {
+        "/v1/tracks": {
+            "get": {
+                "tags": [
+                    "Track"
+                ],
+                "operationId": "eb47f61e13bccf9e2341d5eafdb1faf9",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "search"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TrackDTO"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiToken": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ArtistDTO": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ImageDTO": {
+                "properties": {
+                    "height": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "width": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "url": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TrackDTO": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "releaseDate": {
+                        "type": "string"
+                    },
+                    "releaseDatePrecision": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "durationMs": {
+                        "type": "integer"
+                    },
+                    "externalUrl": {
+                        "type": "string"
+                    },
+                    "previewUrl": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "isPlayable": {
+                        "type": "boolean"
+                    },
+                    "artists": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ArtistDTO"
+                        }
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ImageDTO"
+                        }
+                    },
+                    "durationFormatted": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "ApiToken": {
+                "type": "apiKey",
+                "description": "Bearer mytoken",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Track"
+        }
+    ]
+}

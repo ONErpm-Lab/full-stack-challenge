@@ -1,0 +1,10 @@
+{
+    "$schema": "https://json.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {},
+    "devDependencies": {
+        "chokidar": "^4.0.3",
+        "concurrently": "^9.0.1"
+    }
+}
