@@ -1,0 +1,613 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Roger Backend Challenge - Tracks API",
+		"description": "Coleção do Postman para a API de faixas musicais do projeto Roger Backend Challenge.\n\nEsta coleção inclui todos os endpoints disponíveis para gerenciamento de faixas, com exemplos de uso e diferentes cenários de teste.\n\n**Base URL:** http://localhost:8000/api\n\n**Endpoints disponíveis:**\n- GET /tracks - Listar faixas com filtros\n- GET /tracks/{id} - Obter faixa específica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tracks",
+			"item": [
+				{
+					"name": "Listar todas as faixas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks"
+							]
+						},
+						"description": "Lista todas as faixas disponíveis sem filtros. Retorna as primeiras 15 faixas ordenadas por nome em ordem crescente."
+					},
+					"response": [
+						{
+							"name": "Sucesso - Lista de faixas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tracks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tracks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"data\": [\n    {\n      \"id\": 2,\n      \"isrc\": \"BR1SP1200071\",\n      \"spotify_id\": \"4s71Bub5KzXBSMyE8nlH4E\",\n      \"name\": \"É pra Você\",\n      \"duration\": \"02:57\",\n      \"duration_ms\": 177626,\n      \"preview_url\": null,\n      \"spotify_url\": \"https://open.spotify.com/track/4s71Bub5KzXBSMyE8nlH4E\",\n      \"thumb_url\": \"https://i.scdn.co/image/ab67616d0000b2733efb91ce3d4c540d8bdcb312\",\n      \"available_in_brazil\": true,\n      \"created_at\": \"2025-07-24T04:04:04.000000Z\",\n      \"updated_at\": \"2025-07-24T04:04:04.000000Z\",\n      \"album\": {\n        \"id\": 2,\n        \"spotify_id\": \"2DhdYMG5ecPrLbSsTbznz1\",\n        \"name\": \"É pra Você\",\n        \"release_date\": \"25 Mar 2014\",\n        \"thumb_url\": \"https://i.scdn.co/image/ab67616d0000b2733efb91ce3d4c540d8bdcb312\",\n        \"spotify_url\": \"https://open.spotify.com/album/2DhdYMG5ecPrLbSsTbznz1\",\n        \"created_at\": \"2025-07-24T04:04:04.000000Z\",\n        \"updated_at\": \"2025-07-24T04:04:04.000000Z\"\n      },\n      \"artists\": [\n        {\n          \"id\": 2,\n          \"spotify_id\": \"3IeOkdKc5Z0WTTCLVyMyT5\",\n          \"name\": \"Gó Gó Boys\",\n          \"spotify_url\": \"https://open.spotify.com/artist/3IeOkdKc5Z0WTTCLVyMyT5\",\n          \"created_at\": \"2025-07-24T04:04:04.000000Z\",\n          \"updated_at\": \"2025-07-24T04:04:04.000000Z\"\n        }\n      ]\n    }\n  ],\n  \"links\": {\n    \"first\": \"http://localhost:8000/api/tracks?sort=name&direction=asc&per_page=15&page=1\",\n    \"last\": \"http://localhost:8000/api/tracks?sort=name&direction=asc&per_page=15&page=1\",\n    \"prev\": null,\n    \"next\": null\n  },\n  \"meta\": {\n    \"current_page\": 1,\n    \"from\": 1,\n    \"last_page\": 1,\n    \"per_page\": 15,\n    \"to\": 8,\n    \"total\": 8\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Buscar faixas por nome ou ISRC",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks?search=repente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "repente",
+									"description": "Busca por nome da faixa ou ISRC"
+								}
+							]
+						},
+						"description": "Busca faixas que contenham o termo 'repente' no nome ou no código ISRC."
+					}
+				},
+				{
+					"name": "Filtrar faixas disponíveis no Brasil",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks?available_in_brazil=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks"
+							],
+							"query": [
+								{
+									"key": "available_in_brazil",
+									"value": "1",
+									"description": "Filtra apenas faixas disponíveis no Brasil"
+								}
+							]
+						},
+						"description": "Lista apenas as faixas que estão disponíveis no Brasil."
+					}
+				},
+				{
+					"name": "Buscar faixas por artista",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks?artist=pianorquestra",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks"
+							],
+							"query": [
+								{
+									"key": "artist",
+									"value": "pianorquestra",
+									"description": "Filtra faixas por nome do artista"
+								}
+							]
+						},
+						"description": "Busca faixas que tenham artistas com o nome 'pianorquestra'."
+					}
+				},
+				{
+					"name": "Ordenar por data de criação (mais recentes)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks?sort=created_at&direction=desc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "created_at",
+									"description": "Campo para ordenação (name, created_at, release_date)"
+								},
+								{
+									"key": "direction",
+									"value": "desc",
+									"description": "Direção da ordenação (asc, desc)"
+								}
+							]
+						},
+						"description": "Lista faixas ordenadas por data de criação, mostrando as mais recentes primeiro."
+					}
+				},
+				{
+					"name": "Busca avançada com múltiplos filtros",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks?search=repente&available_in_brazil=true&artist=pianorquestra&sort=name&direction=asc&per_page=20&page=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "repente",
+									"description": "Busca por nome da faixa ou ISRC"
+								},
+								{
+									"key": "available_in_brazil",
+									"value": "1",
+									"description": "Filtra apenas faixas disponíveis no Brasil"
+								},
+								{
+									"key": "artist",
+									"value": "pianorquestra",
+									"description": "Filtra faixas por nome do artista"
+								},
+								{
+									"key": "sort",
+									"value": "name",
+									"description": "Campo para ordenação"
+								},
+								{
+									"key": "direction",
+									"value": "asc",
+									"description": "Direção da ordenação"
+								},
+								{
+									"key": "per_page",
+									"value": "20",
+									"description": "Número de itens por página (1-100)"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Número da página"
+								}
+							]
+						},
+						"description": "Exemplo de busca avançada combinando múltiplos filtros: busca por 'repente', apenas faixas disponíveis no Brasil, do artista 'pianorquestra', ordenadas por nome, 20 itens por página."
+					}
+				},
+				{
+					"name": "Paginação - Segunda página",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks?page=2&per_page=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"description": "Número da página"
+								},
+								{
+									"key": "per_page",
+									"value": "4",
+									"description": "Número de itens por página"
+								}
+							]
+						},
+						"description": "Exemplo de paginação - segunda página com 4 itens por página."
+					}
+				},
+				{
+					"name": "Obter faixa específica por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks",
+								"1"
+							]
+						},
+						"description": "Retorna os detalhes completos de uma faixa específica pelo seu ID."
+					},
+					"response": [
+						{
+							"name": "Sucesso - Faixa encontrada",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tracks/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tracks",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"data\": {\n    \"id\": 1,\n    \"isrc\": \"BRC310600002\",\n    \"spotify_id\": \"4lwE7ainG51zmxt1xAC7XQ\",\n    \"name\": \"Repente\",\n    \"duration\": \"02:50\",\n    \"duration_ms\": 170733,\n    \"preview_url\": null,\n    \"spotify_url\": \"https://open.spotify.com/track/4lwE7ainG51zmxt1xAC7XQ\",\n    \"thumb_url\": \"https://i.scdn.co/image/ab67616d0000b2731932184ef8c5c68f8c550c33\",\n    \"available_in_brazil\": true,\n    \"created_at\": \"2025-07-24T04:04:04.000000Z\",\n    \"updated_at\": \"2025-07-24T04:04:04.000000Z\",\n    \"album\": {\n      \"id\": 1,\n      \"spotify_id\": \"4z5tTNSi1MdrKbKz0Riauf\",\n      \"name\": \"Dez Mãos e um Piano Preparado\",\n      \"release_date\": \"13 Jun 2013\",\n      \"thumb_url\": \"https://i.scdn.co/image/ab67616d0000b2731932184ef8c5c68f8c550c33\",\n      \"spotify_url\": \"https://open.spotify.com/album/4z5tTNSi1MdrKbKz0Riauf\",\n      \"created_at\": \"2025-07-24T04:04:04.000000Z\",\n      \"updated_at\": \"2025-07-24T04:04:04.000000Z\"\n    },\n    \"artists\": [\n      {\n        \"id\": 1,\n        \"spotify_id\": \"68vvXAJFi8LizXAjGHiWtZ\",\n        \"name\": \"PianOrquestra\",\n        \"spotify_url\": \"https://open.spotify.com/artist/68vvXAJFi8LizXAjGHiWtZ\",\n        \"created_at\": \"2025-07-24T04:04:04.000000Z\",\n        \"updated_at\": \"2025-07-24T04:04:04.000000Z\"\n      }\n    ]\n  }\n}"
+						},
+						{
+							"name": "Erro - Faixa não encontrada",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tracks/999",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tracks",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"No query results for model [App\\\\Models\\\\Track] 999\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Endpoints relacionados ao gerenciamento de faixas musicais."
+		},
+		{
+			"name": "Testes de Validação",
+			"item": [
+				{
+					"name": "Erro - Parâmetro per_page inválido",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks?per_page=150",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "150",
+									"description": "Valor inválido - máximo é 100"
+								}
+							]
+						},
+						"description": "Teste de validação - per_page com valor acima do máximo permitido (100)."
+					},
+					"response": [
+						{
+							"name": "Erro de validação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tracks?per_page=150",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tracks"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "150"
+										}
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"The per page field must not be greater than 100.\",\n  \"errors\": {\n    \"per_page\": [\n      \"Maximum of 100 items per page allowed.\"\n    ]\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Erro - Campo sort inválido",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tracks?sort=invalid_field",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tracks"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "invalid_field",
+									"description": "Campo inválido para ordenação"
+								}
+							]
+						},
+						"description": "Teste de validação - campo sort com valor inválido."
+					},
+					"response": [
+						{
+							"name": "Erro de validação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tracks?sort=invalid_field",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tracks"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "invalid_field"
+										}
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"The selected sort is invalid.\",\n  \"errors\": {\n    \"sort\": [\n      \"Sort field must be one of: name, created_at, release_date.\"\n    ]\n  }\n}\n"
+						}
+					]
+				}
+			],
+			"description": "Testes de validação e casos de erro da API."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		}
+	]
+}
