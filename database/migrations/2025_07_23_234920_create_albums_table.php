@@ -11,9 +11,10 @@ return new class () extends Migration {
             $table->id();
             $table->string('name');
             $table->string('spotify_id')->unique();
-            $table->string('spotify_url');
-            $table->date('release_date');
-            $table->string('release_date_precision');
+            $table->string('spotify_url')->nullable();
+            $table->date('release_date')->nullable();
+            $table->string('release_date_precision')->nullable();
+            $table->string('thumb_url')->nullable();
             $table->timestamps();
         });
     }
