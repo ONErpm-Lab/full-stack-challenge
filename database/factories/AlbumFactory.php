@@ -17,12 +17,12 @@ class AlbumFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'                   => $this->faker->sentence(2),
-            'spotify_id'             => $this->faker->unique()->uuid(),
-            'spotify_url'            => $this->faker->url(),
-            'release_date'           => $this->faker->date(),
-            'release_date_precision' => $this->faker->randomElement(['day', 'month', 'year']),
-            'thumb_url'              => $this->faker->imageUrl(),
+            'name'                   => 'Test Album ' . rand(1, 1000),
+            'spotify_id'             => 'spotify_' . uniqid('', true),
+            'spotify_url'            => 'https://open.spotify.com/album/' . uniqid('', true),
+            'release_date'           => '2023-01-01',
+            'release_date_precision' => 'day',
+            'thumb_url'              => 'https://example.com/thumb.jpg',
         ];
     }
 }

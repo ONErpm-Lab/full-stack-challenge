@@ -35,6 +35,8 @@ class TracksController extends Controller
             });
         }
 
+        $tracks->orderBy($request->getSort(), $request->getDirection());
+
         $tracks = $tracks->paginate($request->getPerPage())->appends([
             'search'          => $search,
             'available_in_br' => $availableInBrazil,
