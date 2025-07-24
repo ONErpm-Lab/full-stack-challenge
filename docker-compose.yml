@@ -1,0 +1,64 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: roger-challenge-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - roger-challenge-network
+    depends_on:
+      - db
+      - redis
+
+  webserver:
+    image: nginx:alpine
+    container_name: roger-challenge-webserver
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - roger-challenge-network
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.0
+    container_name: roger-challenge-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: roger-challenge_backend_challenge
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_USER: roger-challenge
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    ports:
+      - "3306:3306"
+    networks:
+      - roger-challenge-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: roger-challenge-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - roger-challenge-network
+
+volumes:
+  dbdata:
+    driver: local
+
+networks:
+  roger-challenge-network:
+    driver: bridge
