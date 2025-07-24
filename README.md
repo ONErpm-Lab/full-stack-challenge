@@ -38,6 +38,36 @@ Coleção do Postman pronta para importar com todos os endpoints e exemplos: [po
 - `GET /api/tracks` - Listar faixas com filtros, busca, ordenação e paginação
 - `GET /api/tracks/{id}` - Obter detalhes de uma faixa específica
 
+
+## O que foi feito
+
+### Estrutura API e projeto
+
+- API RESTful completa com endpoints para listagem, detalhes e busca de faixas
+- Filtros avançados (busca por texto, artista, disponibilidade no Brasil)
+- Paginação e ordenação dinâmica por diferentes campos
+- Relacionamentos Eloquent estruturados (Track/Artist/Album)
+- Accessors para formatação automática de dados (duração, datas)
+- Resources para formatação consistente (TrackResource, ArtistResource, AlbumResource)
+- Validação com FormRequest
+- Importação das informações de faixas musicais do Spotify, somente quando encontradas com base no ISRC
+- Service Pattern para integração com Spotify Web API
+
+### Documentação e Testes
+- Documentação da API completa
+- Coleção Postman com todos os endpoints e exemplos
+- Testes automatizados para validação e casos de erro
+- Setup Docker para ambiente de desenvolvimento
+
+### Próximos passos
+
+- Importação via CSV com Jobs assíncronos para maior flexibilidade
+- Cache Redis para otimização de consultas frequentes
+- Rate limiting para proteção da API
+- Monitoramento e métricas de desempenho
+- Filtros adicionais conforme necessidade do negócio
+- Download das imagens de capa das faixas/álbum para serviço local
+
 ---
 
 ## Início
