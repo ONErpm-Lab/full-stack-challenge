@@ -179,7 +179,7 @@ GET /api/tracks/1
 
 ## Exemplos de Uso
 
-### Buscar faixas por nome
+### Buscar faixas por nome ou ISRC
 ```http
 GET /api/tracks?search=repente
 ```
