@@ -1,3 +1,45 @@
+## Setup Rápido com Docker
+
+Para rodar o projeto rapidamente com Docker (PHP 8.4, MySQL, Redis, Nginx):
+
+```bash
+# Clone o repositório
+git clone https://github.com/rogerarruda/roger-backend-challenge
+cd roger-backend-challenge
+
+# Execute o script de setup automático
+./setup.sh
+```
+
+A aplicação estará disponível em: http://localhost:8000
+
+Para rodar os testes:
+```bash
+docker-compose exec app php artisan test
+```
+
+📚 **Documentação completa do Docker**: [DOCKER_SETUP.md](DOCKER_SETUP.md)
+
+## 📋 Documentação da API
+
+### API Documentation
+Documentação completa dos endpoints da API de faixas musicais: [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
+
+### Postman Collection
+Coleção do Postman pronta para importar com todos os endpoints e exemplos: [postman_collection.json](postman_collection.json)
+
+**Como importar no Postman:**
+1. Abra o Postman
+2. Clique em "Import" 
+3. Selecione o arquivo `postman_collection.json`
+4. A coleção "Roger Backend Challenge - Tracks API" será importada com todos os endpoints
+
+**Endpoints disponíveis:**
+- `GET /api/tracks` - Listar faixas com filtros, busca, ordenação e paginação
+- `GET /api/tracks/{id}` - Obter detalhes de uma faixa específica
+
+---
+
 ## Início
 
 Bem vindo ao mundo da música!
