@@ -34,10 +34,10 @@ services:
     container_name: roger-challenge-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: roger-challenge_backend_challenge
+      MYSQL_DATABASE: roger_backend_challenge
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
-      MYSQL_USER: roger-challenge
+      MYSQL_USER: roger_backend_challenge
     volumes:
       - dbdata:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
