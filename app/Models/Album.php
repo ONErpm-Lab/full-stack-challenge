@@ -17,6 +17,7 @@ class Album extends Model
         'spotify_url',
         'release_date',
         'release_date_precision',
+        'thumb_url',
     ];
 
     public function tracks(): HasMany
