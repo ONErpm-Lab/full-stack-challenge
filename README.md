@@ -13,8 +13,8 @@ Ele funciona como um código de barras da faixa.
 
 Durante o fechamento de contrato com um produtor, foram informados 10 ISRC's que não constam em nossas bases de dados, que seguem abaixo:
 
-* US7VG1846811
-* US7QQ1846811
+* NO1R42509310
+* NO1R42511410
 * BRC310600002
 * BR1SP1200071
 * BR1SP1200070
